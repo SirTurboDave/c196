@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_add_sample_data">Add sample data</string>
     <string name="title_activity_term_detail">TermDetailActivity</string>
+    <string name="title_activity_term_editor">TermEditorActivity</string>
+    <string name="delete_all_terms">Delete all terms</string>
+    <string name="term_name">Term Name</string>
 </resources>

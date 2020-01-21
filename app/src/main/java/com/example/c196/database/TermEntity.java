@@ -1,15 +1,21 @@
-package com.example.c196.model;
+package com.example.c196.database;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
+@Entity(tableName = "terms")
 public class TermEntity {
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String termName;
     private Date termStartDate;
     private Date termEndDate;
 
+    @Ignore
     public TermEntity() {
     }
 
@@ -20,6 +26,7 @@ public class TermEntity {
         this.termEndDate = termEndDate;
     }
 
+    @Ignore
     public TermEntity(String termName, Date termStartDate, Date termEndDate) {
         this.termName = termName;
         this.termStartDate = termStartDate;

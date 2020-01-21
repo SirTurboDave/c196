@@ -1,6 +1,6 @@
 package com.example.c196.utilities;
 
-import com.example.c196.model.TermEntity;
+import com.example.c196.database.TermEntity;
 
 import java.util.ArrayList;
 import java.util.Calendar;

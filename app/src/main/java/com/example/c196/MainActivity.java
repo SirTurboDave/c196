@@ -2,14 +2,18 @@ package com.example.c196;
 
 import android.os.Bundle;
 
-import com.example.c196.model.TermEntity;
+import com.example.c196.database.TermEntity;
 import com.example.c196.ui.TermsAdapter;
 import com.example.c196.utilities.SampleData;
+import com.example.c196.viewmodel.MainViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<TermEntity> termsData = new ArrayList<>();
     private TermsAdapter mAdapter;
+    private MainViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         initRecyclerView();
+        initViewModel();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,17 +55,33 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
 
-        termsData.addAll(SampleData.getTerms());
+    private void initViewModel() {
+
+        final Observer<List<TermEntity>> termsObserver = new Observer<List<TermEntity>>() {
+            @Override
+            public void onChanged(List<TermEntity> termEntities) {
+                termsData.clear();
+                termsData.addAll(termEntities);
+
+                if (mAdapter == null) {
+                    mAdapter = new TermsAdapter(termsData, MainActivity.this);
+                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        };
+
+        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        mViewModel.mTerms.observe(this, termsObserver);
     }
 
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-
-        mAdapter = new TermsAdapter(termsData, this);
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -77,10 +99,22 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_add_sample_data) {
+            addSampleData();
+            return true;
+        } else if (id == R.id.action_delete_all_terms) {
+            deleteAllTerms();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteAllTerms() {
+        mViewModel.deleteAllTerms();
+    }
+
+    private void addSampleData() {
+        mViewModel.addSampleData();
     }
 }
