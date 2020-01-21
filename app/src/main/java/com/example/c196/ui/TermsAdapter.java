@@ -1,4 +1,4 @@
-package com.example.myapplication.ui;
+package com.example.c196.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.R;
-import com.example.myapplication.model.TermEntity;
+import com.example.c196.R;
+import com.example.c196.model.TermEntity;
 
 import java.util.List;
 

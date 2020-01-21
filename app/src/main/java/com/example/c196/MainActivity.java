@@ -1,10 +1,10 @@
-package com.example.myapplication;
+package com.example.c196;
 
 import android.os.Bundle;
 
-import com.example.myapplication.model.TermEntity;
-import com.example.myapplication.ui.TermsAdapter;
-import com.example.myapplication.utilities.SampleData;
+import com.example.c196.model.TermEntity;
+import com.example.c196.ui.TermsAdapter;
+import com.example.c196.utilities.SampleData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
