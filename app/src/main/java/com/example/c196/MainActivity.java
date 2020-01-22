@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add_sample_data) {
-            addSampleData();
+        if (id == R.id.action_add_sample_terms) {
+            addSampleTerms();
             return true;
         } else if (id == R.id.action_delete_all_terms) {
             deleteAllTerms();
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         mViewModel.deleteAllTerms();
     }
 
-    private void addSampleData() {
+    private void addSampleTerms() {
         mViewModel.addSampleData();
     }
 }
