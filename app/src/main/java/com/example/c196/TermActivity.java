@@ -15,6 +15,9 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -27,8 +30,17 @@ public class TermActivity extends AppCompatActivity {
     @BindView(R.id.term_name)
     TextView mTermName;
 
+    @BindView(R.id.term_start_date)
+    TextView mTermStartDate;
+
+    @BindView(R.id.term_end_date)
+    TextView mTermEndDate;
+
     private TermViewModel termViewModel;
     private boolean mNewTerm;
+
+    private String datePattern = "MMM-dd-yyyy";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern, Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +72,8 @@ public class TermActivity extends AppCompatActivity {
             public void onChanged(TermEntity termEntity) {
                 if (termEntity != null) {
                     mTermName.setText(termEntity.getTermName());
-
+                    mTermStartDate.setText(simpleDateFormat.format(termEntity.getTermStartDate()));
+                    mTermEndDate.setText(simpleDateFormat.format(termEntity.getTermEndDate()));
                 }
             }
         });
