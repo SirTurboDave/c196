@@ -12,13 +12,21 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
+            android:id="@+id/term_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
-
+            android:theme="?attr/actionBarTheme">
+            <TextView
+                android:id="@+id/term_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/term_name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorTitle"/>
+        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_term_detail" />
@@ -30,14 +38,5 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_edit" />
-
-    <TextView
-        android:id="@+id/term_name"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:paddingHorizontal="20dp"
-        android:textSize="20sp"
-        android:gravity="center_vertical"
-        android:text="@string/term_name" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

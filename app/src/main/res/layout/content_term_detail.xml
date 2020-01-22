@@ -10,10 +10,53 @@
 
     <EditText
         android:id="@+id/term_start_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="133dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:autofillHints="@string/start_date"/>
+
+    <TextView
+        android:id="@+id/term_start_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:labelFor="@id/term_start_date"
+        android:text="@string/start_date"
+        app:layout_constraintEnd_toStartOf="@+id/term_start_date"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/term_end_date"
+        android:layout_width="133dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:autofillHints="@string/start_date"/>
+
+    <TextView
+        android:id="@+id/term_end_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
+        android:gravity="center_vertical"
+        android:labelFor="@id/term_end_date"
+        android:text="@string/end_date"
+        app:layout_constraintEnd_toStartOf="@+id/term_start_date"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

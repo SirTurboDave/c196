@@ -12,6 +12,7 @@ public class SampleData {
     public static final String SAMPLE_TERM_1 = "Term 1";
     public static final String SAMPLE_TERM_2 = "Term 2";
     public static final String SAMPLE_TERM_3 = "Term 3";
+    public static final String SAMPLE_TERM_4 = "Fall Term";
 
     private static Date getStartDate(int diff) {
         GregorianCalendar cal = new GregorianCalendar();
@@ -39,6 +40,7 @@ public class SampleData {
     terms.add(new TermEntity(SAMPLE_TERM_1, getStartDate(0), getEndDate(0)));
     terms.add(new TermEntity(SAMPLE_TERM_2, getStartDate(1), getEndDate(1)));
     terms.add(new TermEntity(SAMPLE_TERM_3, getStartDate(2), getEndDate(2)));
+    terms.add(new TermEntity(SAMPLE_TERM_4, getStartDate(3), getEndDate(3)));
     return terms;
     }
 }

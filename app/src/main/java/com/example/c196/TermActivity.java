@@ -60,6 +60,7 @@ public class TermActivity extends AppCompatActivity {
             public void onChanged(TermEntity termEntity) {
                 if (termEntity != null) {
                     mTermName.setText(termEntity.getTermName());
+
                 }
             }
         });
@@ -73,5 +74,4 @@ public class TermActivity extends AppCompatActivity {
             termViewModel.loadData(termId);
         }
     }
-
 }
