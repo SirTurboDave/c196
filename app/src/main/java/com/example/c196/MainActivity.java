@@ -1,5 +1,6 @@
 package com.example.c196;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.c196.database.TermEntity;
@@ -26,11 +27,18 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
+    @OnClick(R.id.fab_new_term)
+    void fabClickHandler() {
+        Intent intent = new Intent(this, TermEditorActivity.class);
+        startActivity(intent);
+    }
 
     private List<TermEntity> termsData = new ArrayList<>();
     private TermsAdapter mAdapter;
@@ -46,15 +54,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     private void initViewModel() {
@@ -111,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteAllTerms() {
-        mViewModel.deleteAllTerms();
+        mViewModel.deleteSampleData();
     }
 
     private void addSampleTerms() {

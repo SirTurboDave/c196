@@ -4,8 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/list_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".TermEditorActivity"
     tools:showIn="@layout/activity_term_editor">
+
+    <EditText
+        android:id="@+id/term_name_edit"
+        android:inputType="textCapWords"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:autofillHints="@string/term_name"
+        android:hint="@string/term_name" />
+
+    <EditText
+        android:id="@+id/term_start_date_edit"
+        android:inputType="date"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/term_name_edit"
+        app:layout_constraintTop_toBottomOf="@id/term_name_edit"
+        android:autofillHints="@string/start_date"
+        android:hint="@string/start_date" />
+
+    <EditText
+        android:id="@+id/term_end_date_edit"
+        android:inputType="date"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/term_start_date_edit"
+        app:layout_constraintTop_toBottomOf="@id/term_start_date_edit"
+        android:autofillHints="@string/end_date"
+        android:hint="@string/end_date" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_calendar"
+        tools:layout_editor_absoluteX="286dp"
+        tools:layout_editor_absoluteY="40dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_calendar"
+        tools:layout_editor_absoluteX="286dp"
+        tools:layout_editor_absoluteY="90dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

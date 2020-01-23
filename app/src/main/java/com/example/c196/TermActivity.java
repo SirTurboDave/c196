@@ -109,6 +109,7 @@ public class TermActivity extends AppCompatActivity {
         };
 
         Bundle extras = getIntent().getExtras();
+
         if (extras != null) {
             termId = extras.getInt(TERM_ID_KEY);
             termViewModel.getCoursesByTermId(termId).observe(this, coursesObserver);

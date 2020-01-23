@@ -71,12 +71,17 @@ public class AppRepository {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mDb.termDao().deleteAll();
+                mDb.courseDao().deleteAll();
             }
         });
     }
 
     public CourseEntity getCourseById(int courseId) {
         return mDb.courseDao().getCourseById(courseId);
+    }
+
+    public void deleteSampleData() {
+        deleteAllTerms();
+        deleteAllCourses();
     }
 }

@@ -51,6 +51,7 @@ public class DatabaseTest {
         termDao.insertAll(SampleData.getTerms());
         int count = termDao.getCount();
         Log.i(TAG, "createAndRetrieveTerms: count=" + count);
+        Log.i(TAG, "createAndRetrieveTerms: " + termDao.toString());
         assertEquals(SampleData.getTerms().size(), count);
     }
 
