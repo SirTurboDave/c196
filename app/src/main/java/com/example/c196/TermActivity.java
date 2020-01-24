@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.c196.database.CourseEntity;
 import com.example.c196.database.TermEntity;
 import com.example.c196.ui.CoursesAdapter;
+import com.example.c196.utilities.DateFormatter;
 import com.example.c196.utilities.SampleData;
 import com.example.c196.viewmodel.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -54,9 +55,6 @@ public class TermActivity extends AppCompatActivity {
     private List<CourseEntity> coursesData = new ArrayList<>();
     private CoursesAdapter mAdapter;
 
-    private String datePattern = "MMM-dd-yyyy";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern, Locale.getDefault());
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,15 +65,6 @@ public class TermActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     private void initViewModel() {
@@ -87,8 +76,8 @@ public class TermActivity extends AppCompatActivity {
             public void onChanged(TermEntity termEntity) {
                 if (termEntity != null) {
                     mTermName.setText(termEntity.getTermName());
-                    mTermStartDate.setText(simpleDateFormat.format(termEntity.getTermStartDate()));
-                    mTermEndDate.setText(simpleDateFormat.format(termEntity.getTermEndDate()));
+                    mTermStartDate.setText(DateFormatter.format(termEntity.getTermStartDate()));
+                    mTermEndDate.setText(DateFormatter.format(termEntity.getTermEndDate()));
                 }
             }
         });

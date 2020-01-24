@@ -42,10 +42,6 @@ public class AppRepository {
         });
     }
 
-    private LiveData<List<TermEntity>> getAllTerms() {
-        return mDb.termDao().getAll();
-    }
-
     public void deleteAllTerms() {
         executor.execute(new Runnable() {
             @Override
@@ -57,6 +53,10 @@ public class AppRepository {
 
     public TermEntity getTermById(int termId) {
         return mDb.termDao().getTermById(termId);
+    }
+
+    private LiveData<List<TermEntity>> getAllTerms() {
+        return mDb.termDao().getAll();
     }
 
     public LiveData<List<CourseEntity>> getCoursesByTermId(int termId) {
@@ -83,5 +83,9 @@ public class AppRepository {
     public void deleteSampleData() {
         deleteAllTerms();
         deleteAllCourses();
+    }
+
+    public void insertTerm(TermEntity term) {
+        mDb.termDao().insertTerm(term);
     }
 }
