@@ -1,5 +1,6 @@
 package com.example.c196;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.c196.database.CourseEntity;
@@ -31,6 +32,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
@@ -44,6 +46,12 @@ public class TermActivity extends AppCompatActivity {
 
     @BindView(R.id.term_end_date)
     TextView mTermEndDate;
+
+    @OnClick(R.id.edit_term_fab)
+    void fabClickHandler() {
+        Intent intent = new Intent(this, TermEditorActivity.class);
+        startActivity(intent);
+    }
 
     @BindView(R.id.term_course_list)
     RecyclerView mRecyclerView;
@@ -89,7 +97,7 @@ public class TermActivity extends AppCompatActivity {
                 coursesData.addAll(courseEntities);
 
                 if (mAdapter == null) {
-                    mAdapter = new CoursesAdapter(coursesData, TermActivity.this);
+                    mAdapter = new CoursesAdapter(termId, coursesData, TermActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else {
                     mAdapter.notifyDataSetChanged();

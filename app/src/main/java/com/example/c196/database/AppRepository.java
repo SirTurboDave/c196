@@ -86,6 +86,11 @@ public class AppRepository {
     }
 
     public void insertTerm(TermEntity term) {
-        mDb.termDao().insertTerm(term);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.termDao().insertTerm(term);
+            }
+        });
     }
 }

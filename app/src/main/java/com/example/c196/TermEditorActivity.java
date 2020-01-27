@@ -4,22 +4,19 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.c196.database.DateConverter;
+import com.example.c196.database.TermEntity;
 import com.example.c196.utilities.DateFormatter;
 import com.example.c196.viewmodel.EditorViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -29,22 +26,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.c196.utilities.Constants.TERM_ID_KEY;
+
 public class TermEditorActivity extends AppCompatActivity {
 
     private EditorViewModel mViewModel;
     private GregorianCalendar cal;
 
     @BindView(R.id.term_name_edit)
-    EditText termName;
+    EditText mTermName;
 
     @BindView(R.id.term_start_date_edit)
     EditText termStartDateText;
 
     @BindView(R.id.term_end_date_edit)
     EditText termEndDateText;
+    private boolean mNewTerm;
 
     @OnClick(R.id.save_term_fab)
     void fabClickHandler() {
+        saveAndReturn();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -60,7 +61,33 @@ public class TermEditorActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        initViewModel();
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initViewModel() {
+        mViewModel = ViewModelProviders.of(this)
+            .get(EditorViewModel.class);
+
+        mViewModel.mLiveTerm.observe(this, (new Observer<TermEntity>() {
+            @Override
+            public void onChanged(TermEntity termEntity) {
+                if (termEntity != null) {
+                    mTermName.setText(termEntity.getTermName());
+                }
+            }
+        }));
+
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            setTitle("New Term");
+            mNewTerm = true;
+        } else {
+            setTitle("Edit Term");
+            int termId = extras.getInt(TERM_ID_KEY);
+            mViewModel.loadData(termId);
+        }
     }
 
     @OnClick(R.id.term_edit_start_date_fab)
@@ -102,12 +129,18 @@ public class TermEditorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        saveAndReturn();
+    }
+
     private void saveAndReturn() {
         try {
-            Date termStartDate = new Date();
-            Date termEndDate = new Date();
-            mViewModel.saveTerm(termName.getText().toString(), termStartDate, termEndDate);
+            Date termStartDate = DateFormatter.parse(termStartDateText.toString());
+            Date termEndDate = DateFormatter.parse(termEndDateText.toString());
 
+            mViewModel.saveTerm(mTermName.getText().toString(), termStartDate, termEndDate);
+            finish();
         } catch (Exception e) {
             Log.v("Exception", Objects.requireNonNull(e.getMessage()));
         }
