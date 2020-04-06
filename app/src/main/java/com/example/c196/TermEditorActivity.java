@@ -1,5 +1,6 @@
 package com.example.c196;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
@@ -43,13 +46,7 @@ public class TermEditorActivity extends AppCompatActivity {
     EditText termEndDateText;
     private boolean mNewTerm;
 
-    @OnClick(R.id.save_term_fab)
-    void fabClickHandler() {
-        saveAndReturn();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +72,8 @@ public class TermEditorActivity extends AppCompatActivity {
             public void onChanged(TermEntity termEntity) {
                 if (termEntity != null) {
                     mTermName.setText(termEntity.getTermName());
+                    termStartDateText.setText(DateFormatter.format(termEntity.getTermStartDate()));
+                    termEndDateText.setText(DateFormatter.format(termEntity.getTermEndDate()));
                 }
             }
         }));
@@ -119,12 +118,22 @@ public class TermEditorActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (!mNewTerm) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_editor, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             saveAndReturn();
             return true;
-        } else {
-
+        } else if(item.getItemId() == R.id.action_delete) {
+            mViewModel.deleteTerm();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -136,8 +145,8 @@ public class TermEditorActivity extends AppCompatActivity {
 
     private void saveAndReturn() {
         try {
-            Date termStartDate = DateFormatter.parse(termStartDateText.toString());
-            Date termEndDate = DateFormatter.parse(termEndDateText.toString());
+            Date termStartDate = DateFormatter.parse(termStartDateText.getText().toString());
+            Date termEndDate = DateFormatter.parse(termEndDateText.getText().toString());
 
             mViewModel.saveTerm(mTermName.getText().toString(), termStartDate, termEndDate);
             finish();

@@ -11,5 +11,6 @@
     <string name="term_end_date">End Date</string>
     <string name="courses">Courses</string>
     <string name="action_add_sample_terms">Add sample terms</string>
+    <string name="delete">Delete</string>
     <item name="term_name" type="id" />
 </resources>

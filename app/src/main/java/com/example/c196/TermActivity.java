@@ -47,9 +47,13 @@ public class TermActivity extends AppCompatActivity {
     @BindView(R.id.term_end_date)
     TextView mTermEndDate;
 
+    @BindView(R.id.edit_term_fab)
+    FloatingActionButton mFab;
+
     @OnClick(R.id.edit_term_fab)
     void fabClickHandler() {
         Intent intent = new Intent(this, TermEditorActivity.class);
+        intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
     }
 
