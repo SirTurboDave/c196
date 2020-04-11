@@ -10,34 +10,33 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.c196.database.AppRepository;
 import com.example.c196.database.CourseEntity;
 import com.example.c196.database.TermEntity;
-import com.example.c196.utilities.SampleData;
 
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class TermViewModel extends AndroidViewModel {
+public class CourseViewModel extends AndroidViewModel {
 
     public MutableLiveData<List<CourseEntity>> mCourses =
             new MutableLiveData<>();
-    public MutableLiveData<TermEntity> mLiveTerm =
+    public MutableLiveData<CourseEntity> mLiveCourse =
             new MutableLiveData<>();
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    public TermViewModel(@NonNull Application application) {
+    public CourseViewModel(@NonNull Application application) {
         super(application);
         mRepository = AppRepository.getInstance(getApplication());
     }
 
-    public void loadData(final int termId) {
+    public void loadData(final int courseId) {
         executor.execute(() -> {
-            TermEntity term = mRepository.getTermById(termId);
-            mLiveTerm.postValue(term);
+            CourseEntity course = mRepository.getCourseById(courseId);
+            mLiveCourse.postValue(course);
         });
     }
 
-    public LiveData<List<CourseEntity>> getCoursesByTermId(final int termId) {
-        return mRepository.getCoursesByTermId(termId);
+    public LiveData<List<CourseEntity>> getMentorsByCourseId(final int courseId) {
+        return mRepository.getMentorsByCourseId(courseId);
     }
 }

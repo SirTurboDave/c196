@@ -86,12 +86,7 @@ public class AppRepository {
     }
 
     public void insertTerm(TermEntity term) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.termDao().insertTerm(term);
-            }
-        });
+        executor.execute(() -> mDb.termDao().insertTerm(term));
     }
 
     public void deleteTerm(TermEntity term) {
@@ -101,5 +96,10 @@ public class AppRepository {
                 mDb.termDao().deleteTerm(term);
             }
         });
+    }
+
+    public LiveData<List<CourseEntity>> getMentorsByCourseId(int courseId) {
+        //return mDb.courseDao().getMentorsByCourseId(courseId);
+        return null;
     }
 }

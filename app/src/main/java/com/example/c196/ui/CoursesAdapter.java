@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.c196.CourseActivity;
 import com.example.c196.R;
+import com.example.c196.TermActivity;
 import com.example.c196.TermEditorActivity;
 import com.example.c196.database.CourseEntity;
 import com.example.c196.database.TermEntity;
@@ -22,15 +24,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.c196.utilities.Constants.COURSE_ID_KEY;
 import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder> {
 
-    private int termId;
+    private int courseId;
     private final List<CourseEntity> mCourses;
     private final Context mContext;
 
-    public CoursesAdapter(int termId, List<CourseEntity> mCourses, Context mContext) {
+    public CoursesAdapter(int courseId, List<CourseEntity> mCourses, Context mContext) {
         this.mCourses = mCourses;
         this.mContext = mContext;
     }
@@ -46,8 +49,13 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final CourseEntity course = mCourses.get(position);
-        holder.course_text.setText(course.getCourseName());
+        holder.mTextView.setText(course.getCourseName());
 
+        holder.mTextView.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, CourseActivity.class);
+            intent.putExtra(COURSE_ID_KEY, course.getId());
+            mContext.startActivity(intent);
+        });
     }
 
     @Override
@@ -57,7 +65,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.course_text)
-        TextView course_text;
+        TextView mTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

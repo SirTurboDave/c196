@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -80,32 +82,19 @@ public class TermActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
+
         termViewModel = ViewModelProviders.of(this)
                 .get(TermViewModel.class);
 
-        termViewModel.mLiveTerm.observe(this, new Observer<TermEntity>() {
-            @Override
-            public void onChanged(TermEntity termEntity) {
-                if (termEntity != null) {
-                    mTermName.setText(termEntity.getTermName());
-                    mTermStartDate.setText(DateFormatter.format(termEntity.getTermStartDate()));
-                    mTermEndDate.setText(DateFormatter.format(termEntity.getTermEndDate()));
-                }
-            }
-        });
+        final Observer<List<CourseEntity>> coursesObserver = courseEntities -> {
+            coursesData.clear();
+            coursesData.addAll(courseEntities);
 
-        final Observer<List<CourseEntity>> coursesObserver = new Observer<List<CourseEntity>>() {
-            @Override
-            public void onChanged(List<CourseEntity> courseEntities) {
-                coursesData.clear();
-                coursesData.addAll(courseEntities);
-
-                if (mAdapter == null) {
-                    mAdapter = new CoursesAdapter(termId, coursesData, TermActivity.this);
-                    mRecyclerView.setAdapter(mAdapter);
-                } else {
-                    mAdapter.notifyDataSetChanged();
-                }
+            if (mAdapter == null) {
+                mAdapter = new CoursesAdapter(termId, coursesData, TermActivity.this);
+                mRecyclerView.setAdapter(mAdapter);
+            } else {
+                mAdapter.notifyDataSetChanged();
             }
         };
 
@@ -125,5 +114,14 @@ public class TermActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (!mNewTerm) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_term, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 }

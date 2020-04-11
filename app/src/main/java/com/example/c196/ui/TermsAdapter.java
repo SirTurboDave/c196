@@ -45,13 +45,10 @@ public class TermsAdapter extends RecyclerView.Adapter<TermsAdapter.ViewHolder> 
         final TermEntity term = mTerms.get(position);
         holder.mTextView.setText(term.getTermName());
 
-        holder.mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, TermActivity.class);
-                intent.putExtra(TERM_ID_KEY, term.getId());
-                mContext.startActivity(intent);
-            }
+        holder.mTextView.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, TermActivity.class);
+            intent.putExtra(TERM_ID_KEY, term.getId());
+            mContext.startActivity(intent);
         });
     }
 
