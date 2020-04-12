@@ -12,6 +12,7 @@ import com.example.c196.viewmodel.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -25,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,7 +64,6 @@ public class TermActivity extends AppCompatActivity {
     @BindView(R.id.term_course_list)
     RecyclerView mRecyclerView;
 
-    private TermViewModel termViewModel;
     private int termId;
     private boolean mNewTerm;
 
@@ -83,8 +84,14 @@ public class TermActivity extends AppCompatActivity {
 
     private void initViewModel() {
 
-        termViewModel = ViewModelProviders.of(this)
+        TermViewModel mViewModel = ViewModelProviders.of(this)
                 .get(TermViewModel.class);
+
+        mViewModel.mLiveTerm.observe(this, termEntity -> {
+            mTermName.setText(termEntity.getTermName());
+            mTermStartDate.setText(DateFormatter.format(termEntity.getTermStartDate()));
+            mTermEndDate.setText(DateFormatter.format(termEntity.getTermEndDate()));
+        });
 
         final Observer<List<CourseEntity>> coursesObserver = courseEntities -> {
             coursesData.clear();
@@ -102,8 +109,8 @@ public class TermActivity extends AppCompatActivity {
 
         if (extras != null) {
             termId = extras.getInt(TERM_ID_KEY);
-            termViewModel.getCoursesByTermId(termId).observe(this, coursesObserver);
-            termViewModel.loadData(termId);
+            mViewModel.getCoursesByTermId(termId).observe(this, coursesObserver);
+            mViewModel.loadData(termId);
         } else {
             setTitle("New Term");
             mNewTerm = true;

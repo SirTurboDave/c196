@@ -34,6 +34,4 @@ public interface CourseDao {
 
     @Query("select count(id) from courses")
     int getCount();
-
-    //LiveData<List<CourseEntity>> getMentorsByCourseId(int courseId);
 }

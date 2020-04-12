@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.c196.database.AppRepository;
 import com.example.c196.database.CourseEntity;
+import com.example.c196.database.MentorEntity;
 import com.example.c196.database.TermEntity;
 
 import java.util.List;
@@ -36,7 +37,7 @@ public class CourseViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<List<CourseEntity>> getMentorsByCourseId(final int courseId) {
+    public LiveData<List<MentorEntity>> getMentorsByCourseId(final int courseId) {
         return mRepository.getMentorsByCourseId(courseId);
     }
 }

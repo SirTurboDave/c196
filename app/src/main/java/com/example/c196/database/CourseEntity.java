@@ -18,6 +18,7 @@ public class CourseEntity {
     private String courseMentor;
     private String courseMentorPhone;
     private String courseMentorEmail;
+    private String courseNote;
 
     @Ignore
     public CourseEntity() {
@@ -26,7 +27,7 @@ public class CourseEntity {
 
     public CourseEntity(int id, int termId, String courseName, Date courseStartDate,
                         Date courseEndDate, String courseStatus, String courseMentor,
-                        String courseMentorPhone, String courseMentorEmail) {
+                        String courseMentorPhone, String courseMentorEmail, String courseNote) {
         this.id = id;
         this.termId = termId;
         this.courseName = courseName;
@@ -36,12 +37,13 @@ public class CourseEntity {
         this.courseMentor = courseMentor;
         this.courseMentorPhone = courseMentorPhone;
         this.courseMentorEmail = courseMentorEmail;
+        this.courseNote = courseNote;
     }
 
     @Ignore
     public CourseEntity(int termId, String courseName, Date courseStartDate, Date courseEndDate,
                         String courseStatus, String courseMentor, String courseMentorPhone,
-                        String courseMentorEmail) {
+                        String courseMentorEmail, String courseNote) {
         this.termId = termId;
         this.courseName = courseName;
         this.courseStartDate = courseStartDate;
@@ -50,6 +52,7 @@ public class CourseEntity {
         this.courseMentor = courseMentor;
         this.courseMentorPhone = courseMentorPhone;
         this.courseMentorEmail = courseMentorEmail;
+        this.courseNote = courseNote;
     }
 
     public int getId() {
@@ -124,6 +127,14 @@ public class CourseEntity {
         this.courseMentorEmail = courseMentorEmail;
     }
 
+    public String getCourseNote() {
+        return courseNote;
+    }
+
+    public void setCourseNote(String courseNote) {
+        this.courseNote = courseNote;
+    }
+
     @Override
     public String toString() {
         return "CourseEntity{" +
@@ -136,6 +147,7 @@ public class CourseEntity {
                 ", courseMentor='" + courseMentor + '\'' +
                 ", courseMentorPhone='" + courseMentorPhone + '\'' +
                 ", courseMentorEmail='" + courseMentorEmail + '\'' +
+                ", courseNote='" + courseNote + '\'' +
                 '}';
     }
 }

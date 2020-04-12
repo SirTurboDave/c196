@@ -15,7 +15,9 @@ public class AppRepository {
 
     public LiveData<List<TermEntity>> mTerms;
     public LiveData<List<CourseEntity>> mCourses;
+    public LiveData<List<MentorEntity>> mMentors;
     public List<CourseEntity> mCoursesByTerm;
+    public List<MentorEntity> mMentorsByCourse;
     private AppDatabase mDb;
     private Executor executor = Executors.newSingleThreadExecutor();
 
@@ -98,8 +100,7 @@ public class AppRepository {
         });
     }
 
-    public LiveData<List<CourseEntity>> getMentorsByCourseId(int courseId) {
-        //return mDb.courseDao().getMentorsByCourseId(courseId);
-        return null;
+    public LiveData<List<MentorEntity>> getMentorsByCourseId(int courseId) {
+        return mDb.mentorDao().getMentorsByCourseId(courseId);
     }
 }

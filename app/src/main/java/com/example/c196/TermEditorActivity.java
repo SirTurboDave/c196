@@ -67,14 +67,11 @@ public class TermEditorActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
             .get(EditorViewModel.class);
 
-        mViewModel.mLiveTerm.observe(this, (new Observer<TermEntity>() {
-            @Override
-            public void onChanged(TermEntity termEntity) {
-                if (termEntity != null) {
-                    mTermName.setText(termEntity.getTermName());
-                    termStartDateText.setText(DateFormatter.format(termEntity.getTermStartDate()));
-                    termEndDateText.setText(DateFormatter.format(termEntity.getTermEndDate()));
-                }
+        mViewModel.mLiveTerm.observe(this, (termEntity -> {
+            if (termEntity != null) {
+                mTermName.setText(termEntity.getTermName());
+                termStartDateText.setText(DateFormatter.format(termEntity.getTermStartDate()));
+                termEndDateText.setText(DateFormatter.format(termEntity.getTermEndDate()));
             }
         }));
 
@@ -133,7 +130,8 @@ public class TermEditorActivity extends AppCompatActivity {
             return true;
         } else if(item.getItemId() == R.id.action_delete) {
             mViewModel.deleteTerm();
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

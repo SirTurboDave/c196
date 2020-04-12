@@ -1,46 +1,104 @@
 package com.example.c196;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.c196.database.CourseEntity;
+import com.example.c196.ui.CoursesAdapter;
+import com.example.c196.utilities.DateFormatter;
 import com.example.c196.viewmodel.CourseViewModel;
+import com.example.c196.viewmodel.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.TextView;
 
+import java.util.List;
+import java.util.Objects;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.example.c196.utilities.Constants.COURSE_ID_KEY;
+import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
 public class CourseActivity extends AppCompatActivity {
 
-    //@BindView(R.id.course_name)
-    //TextView mCourseName;
+    @BindView(R.id.course_start_date)
+    TextView mCourseStartDate;
 
-    //@BindView(R.id.course_start_date)
-    //TextView mCourseStartDate;
+    @BindView(R.id.course_end_date)
+    TextView mCourseEndDate;
 
-    //@BindView(R.id.course_end_date)
-    //TextView mCourseEndDate;
+    @BindView(R.id.course_status)
+    TextView mCourseStatus;
+
+    @BindView(R.id.course_note)
+    TextView mCourseNote;
 
     //@BindView(R.id.course_mentor_list)
     //RecyclerView mRecyclerView;
 
-    private CourseViewModel courseViewModel;
+    @BindView(R.id.edit_course_fab)
+    FloatingActionButton mFab;
+
+    @OnClick(R.id.edit_course_fab)
+    void fabClickHandler() {
+        Intent intent = new Intent(this, CourseEditorActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        startActivity(intent);
+    }
+
+    private int courseId;
+    private boolean mNewCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course);
+        setContentView(R.layout.activity_course_detail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
+        ButterKnife.bind(this);
+        initViewModel();
     }
 
+    private void initViewModel() {
+        CourseViewModel mViewModel = ViewModelProviders.of(this)
+                .get(CourseViewModel.class);
+
+        mViewModel.mLiveCourse.observe(this, courseEntity -> {
+            Objects.requireNonNull(getSupportActionBar()).setTitle(courseEntity.getCourseName());
+            mCourseStartDate.setText(DateFormatter.format(courseEntity.getCourseStartDate()));
+            mCourseEndDate.setText(DateFormatter.format(courseEntity.getCourseEndDate()));
+            mCourseStatus.setText(courseEntity.getCourseStatus());
+            mCourseNote.setText(courseEntity.getCourseNote());
+        });
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            courseId = extras.getInt(COURSE_ID_KEY);
+            mViewModel.loadData(courseId);
+        } else {
+            setTitle("New Course");
+            mNewCourse = true;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (!mNewCourse) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_course, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
 }

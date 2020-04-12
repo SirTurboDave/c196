@@ -10,15 +10,19 @@ import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {TermEntity.class, CourseEntity.class}, version = 2, exportSchema = false)
+import com.example.c196.viewmodel.CourseViewModel;
+
+@Database(entities = {TermEntity.class, CourseEntity.class, MentorEntity.class}, version = 3,
+        exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
-    public static final String DATABASE_NAME = "AppDatabase.db";
+    public static final String DATABASE_NAME = "C196Database.db";
     private static volatile AppDatabase instance;
     private static final Object LOCK = new Object();
 
     public abstract TermDao termDao();
     public abstract CourseDao courseDao();
+    public abstract MentorDao mentorDao();
 
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {
@@ -33,4 +37,5 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return instance;
     }
+
 }

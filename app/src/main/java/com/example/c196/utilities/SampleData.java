@@ -83,40 +83,40 @@ public class SampleData {
         List<CourseEntity> courses = new ArrayList<>();
         courses.add(new CourseEntity(1, SAMPLE_COURSE_1, getCourseStartDate(0),
                 getCourseEndDate(0),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(1, SAMPLE_COURSE_2, getCourseStartDate(1),
                 getCourseEndDate(1),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(1, SAMPLE_COURSE_3, getCourseStartDate(2),
                 getCourseEndDate(2),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(2, SAMPLE_COURSE_4, getCourseStartDate(3),
                 getCourseEndDate(3),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(2, SAMPLE_COURSE_5, getCourseStartDate(4),
                 getCourseEndDate(4),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(2, SAMPLE_COURSE_6, getCourseStartDate(5),
                 getCourseEndDate(5),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(3, SAMPLE_COURSE_7, getCourseStartDate(6),
-                getCourseEndDate(6),"test", "test",
-                "test", "test"));
+                getCourseEndDate(6),"test", "testNote",
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(3, SAMPLE_COURSE_8, getCourseStartDate(7),
                 getCourseEndDate(7),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(3, SAMPLE_COURSE_9, getCourseStartDate(8),
                 getCourseEndDate(8),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(4, SAMPLE_COURSE_10, getCourseStartDate(9),
                 getCourseEndDate(9),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(4, SAMPLE_COURSE_11, getCourseStartDate(10),
                 getCourseEndDate(10),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         courses.add(new CourseEntity(4, SAMPLE_COURSE_12, getCourseStartDate(11),
                 getCourseEndDate(11),"test", "test",
-                "test", "test"));
+                "test", "test", "testNote"));
         return courses;
     }
 }
