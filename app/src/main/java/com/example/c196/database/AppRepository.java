@@ -103,4 +103,8 @@ public class AppRepository {
     public LiveData<List<MentorEntity>> getMentorsByCourseId(int courseId) {
         return mDb.mentorDao().getMentorsByCourseId(courseId);
     }
+
+    public MentorEntity getMentorById(int mentorId) {
+        return mDb.mentorDao().getMentorById(mentorId);
+    }
 }

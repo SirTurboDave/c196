@@ -5,13 +5,11 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.c196.database.TermEntity;
 import com.example.c196.utilities.DateFormatter;
-import com.example.c196.viewmodel.EditorViewModel;
+import com.example.c196.viewmodel.TermEditorViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
@@ -33,7 +31,7 @@ import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
 public class TermEditorActivity extends AppCompatActivity {
 
-    private EditorViewModel mViewModel;
+    private TermEditorViewModel mViewModel;
     private GregorianCalendar cal;
 
     @BindView(R.id.term_name_edit)
@@ -65,7 +63,7 @@ public class TermEditorActivity extends AppCompatActivity {
 
     private void initViewModel() {
         mViewModel = ViewModelProviders.of(this)
-            .get(EditorViewModel.class);
+            .get(TermEditorViewModel.class);
 
         mViewModel.mLiveTerm.observe(this, (termEntity -> {
             if (termEntity != null) {
@@ -118,7 +116,7 @@ public class TermEditorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNewTerm) {
             MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_editor, menu);
+            inflater.inflate(R.menu.menu_term_editor, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }

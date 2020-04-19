@@ -18,14 +18,14 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class EditorViewModel extends AndroidViewModel {
+public class TermEditorViewModel extends AndroidViewModel {
 
     public MutableLiveData<TermEntity> mLiveTerm = new MutableLiveData<>();
 
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    public EditorViewModel(@NonNull Application application) {
+    public TermEditorViewModel(@NonNull Application application) {
         super(application);
         mRepository = AppRepository.getInstance(getApplication());
     }
