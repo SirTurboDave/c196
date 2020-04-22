@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -42,28 +43,25 @@ import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
 public class TermActivity extends AppCompatActivity {
 
-    @BindView(R.id.term_name)
-    TextView mTermName;
-
     @BindView(R.id.term_start_date)
     TextView mTermStartDate;
 
     @BindView(R.id.term_end_date)
     TextView mTermEndDate;
 
-    @BindView(R.id.edit_term_fab)
+    @BindView(R.id.add_course_fab)
     FloatingActionButton mFab;
 
-    @OnClick(R.id.edit_term_fab)
+    @OnClick(R.id.add_course_fab)
     void fabClickHandler() {
-        Intent intent = new Intent(this, TermEditorActivity.class);
-        intent.putExtra(TERM_ID_KEY, termId);
+        Intent intent = new Intent(this, CourseEditorActivity.class);
         startActivity(intent);
     }
 
     @BindView(R.id.term_course_list)
     RecyclerView mRecyclerView;
 
+    private TermViewModel mViewModel;
     private int termId;
     private boolean mNewTerm;
 
@@ -74,7 +72,7 @@ public class TermActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_detail);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.term_toolbar);
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
@@ -88,7 +86,7 @@ public class TermActivity extends AppCompatActivity {
                 .get(TermViewModel.class);
 
         mViewModel.mLiveTerm.observe(this, termEntity -> {
-            mTermName.setText(termEntity.getTermName());
+            Objects.requireNonNull(getSupportActionBar()).setTitle(termEntity.getTermName());
             mTermStartDate.setText(DateFormatter.format(termEntity.getTermStartDate()));
             mTermEndDate.setText(DateFormatter.format(termEntity.getTermEndDate()));
         });
@@ -130,5 +128,17 @@ public class TermActivity extends AppCompatActivity {
             inflater.inflate(R.menu.menu_term, menu);
         }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_edit:
+                Intent intent = new Intent(this, TermEditorActivity.class);
+                intent.putExtra(TERM_ID_KEY, termId);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

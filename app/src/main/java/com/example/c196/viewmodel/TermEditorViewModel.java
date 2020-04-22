@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.c196.database.AppDatabase;
 import com.example.c196.database.AppRepository;
+import com.example.c196.database.CourseEntity;
 import com.example.c196.database.TermDao;
 import com.example.c196.database.TermEntity;
 
@@ -51,6 +52,10 @@ public class TermEditorViewModel extends AndroidViewModel {
             TermEntity term = mRepository.getTermById(termId);
             mLiveTerm.postValue(term);
         });
+    }
+
+    public LiveData<List<CourseEntity>> getCoursesByTermId(final int termId) {
+        return mRepository.getCoursesByTermId(termId);
     }
 
     public void deleteTerm() {

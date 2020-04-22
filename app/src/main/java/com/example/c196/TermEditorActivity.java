@@ -5,12 +5,17 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.c196.database.CourseEntity;
+import com.example.c196.ui.CoursesAdapter;
 import com.example.c196.utilities.DateFormatter;
 import com.example.c196.viewmodel.TermEditorViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.Menu;
@@ -18,9 +23,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -33,6 +40,7 @@ public class TermEditorActivity extends AppCompatActivity {
 
     private TermEditorViewModel mViewModel;
     private GregorianCalendar cal;
+    private int termId;
     private boolean mNewTerm;
 
     @BindView(R.id.term_name_edit)
@@ -52,13 +60,10 @@ public class TermEditorActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_check);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
-
         initViewModel();
-
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
     private void initViewModel() {

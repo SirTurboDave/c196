@@ -40,4 +40,8 @@ public class TermViewModel extends AndroidViewModel {
     public LiveData<List<CourseEntity>> getCoursesByTermId(final int termId) {
         return mRepository.getCoursesByTermId(termId);
     }
+
+    public void deleteTerm() {
+        mRepository.deleteTerm(mLiveTerm.getValue());
+    }
 }
