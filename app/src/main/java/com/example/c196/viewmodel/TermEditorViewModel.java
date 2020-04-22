@@ -47,12 +47,9 @@ public class TermEditorViewModel extends AndroidViewModel {
     }
 
     public void loadData(int termId) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                TermEntity term = mRepository.getTermById(termId);
-                mLiveTerm.postValue(term);
-            }
+        executor.execute(() -> {
+            TermEntity term = mRepository.getTermById(termId);
+            mLiveTerm.postValue(term);
         });
     }
 

@@ -3,7 +3,90 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <EditText
+        android:id="@+id/course_name_edit"
+        android:inputType="textCapWords"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:autofillHints="@string/course_name"
+        android:hint="@string/course_name" />
+
+    <EditText
+        android:id="@+id/course_start_date_edit"
+        android:inputType="date"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="@id/course_name_edit"
+        app:layout_constraintTop_toBottomOf="@id/course_name_edit"
+        android:autofillHints="@string/start_date"
+        android:hint="@string/start_date" />
+
+    <EditText
+        android:id="@+id/course_end_date_edit"
+        android:inputType="date"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        app:layout_constraintStart_toStartOf="@id/course_start_date_edit"
+        app:layout_constraintTop_toBottomOf="@id/course_start_date_edit"
+        android:autofillHints="@string/end_date"
+        android:hint="@string/end_date" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/course_toolbar"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toBottomOf="@id/course_end_date_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mentor_list"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="104dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mentor_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbars="vertical"
+        android:layout_margin="@dimen/list_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/course_toolbar"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/course_edit_start_date_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="@id/course_start_date_edit"
+        app:layout_constraintStart_toEndOf="@id/course_start_date_edit"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_calendar" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/course_edit_end_date_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="mini"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="@id/course_end_date_edit"
+        app:layout_constraintStart_toEndOf="@id/course_end_date_edit"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_calendar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

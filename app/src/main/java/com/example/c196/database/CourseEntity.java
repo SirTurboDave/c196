@@ -55,6 +55,13 @@ public class CourseEntity {
         this.courseNote = courseNote;
     }
 
+    @Ignore
+    public CourseEntity(String courseName, Date courseStartDate, Date courseEndDate) {
+        this.courseName = courseName;
+        this.courseStartDate = courseStartDate;
+        this.courseEndDate = courseEndDate;
+    }
+
     public int getId() {
         return id;
     }

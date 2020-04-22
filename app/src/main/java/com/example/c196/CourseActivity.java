@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.c196.database.CourseEntity;
+import com.example.c196.database.MentorEntity;
 import com.example.c196.ui.CoursesAdapter;
 import com.example.c196.utilities.DateFormatter;
 import com.example.c196.viewmodel.CourseViewModel;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,6 +60,9 @@ public class CourseActivity extends AppCompatActivity {
 
     private int courseId;
     private boolean mNewCourse;
+
+    private List<MentorEntity> mentorsData = new ArrayList<>();
+    //private MentorsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

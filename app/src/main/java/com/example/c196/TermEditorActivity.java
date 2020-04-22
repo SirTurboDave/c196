@@ -33,6 +33,7 @@ public class TermEditorActivity extends AppCompatActivity {
 
     private TermEditorViewModel mViewModel;
     private GregorianCalendar cal;
+    private boolean mNewTerm;
 
     @BindView(R.id.term_name_edit)
     EditText mTermName;
@@ -42,7 +43,6 @@ public class TermEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.term_end_date_edit)
     EditText termEndDateText;
-    private boolean mNewTerm;
 
     @SuppressLint("RestrictedApi")
     @Override
