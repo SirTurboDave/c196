@@ -115,4 +115,111 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_status" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/assessment_toolbar"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@id/course_assessment_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/course_note" />
+
+    <TextView
+        android:id="@+id/assessment_toolbar_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/assessments"
+        android:textSize="@dimen/title_text_size"
+        android:textColor="@color/colorTitle"
+        app:layout_constraintEnd_toEndOf="@id/assessment_toolbar"
+        app:layout_constraintStart_toStartOf="@id/assessment_toolbar"
+        app:layout_constraintTop_toTopOf="@id/assessment_toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/assessment_toolbar" />
+
+    <ImageButton
+        android:id="@+id/course_assessment_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="332dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/assessment_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/assessment_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/assessment_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/assessment_toolbar"
+        app:srcCompat="@drawable/ic_add"
+        android:background="@color/colorPrimary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/course_assessment_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbars="vertical"
+        android:layout_margin="@dimen/list_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assessment_toolbar" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mentor_toolbar"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:layout_margin="@dimen/layout_margin"
+        app:layout_constraintTop_toBottomOf="@id/course_assessment_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/course_mentor_list"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="104dp" />
+
+    <TextView
+        android:id="@+id/mentor_toolbar_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mentors"
+        android:textSize="@dimen/title_text_size"
+        android:textColor="@color/colorTitle"
+        app:layout_constraintEnd_toEndOf="@id/mentor_toolbar"
+        app:layout_constraintStart_toStartOf="@id/mentor_toolbar"
+        app:layout_constraintTop_toTopOf="@id/mentor_toolbar"
+        app:layout_constraintBottom_toBottomOf="@id/mentor_toolbar"
+        tools:layout_editor_absoluteY="143dp" />
+
+    <ImageButton
+        android:id="@+id/course_mentor_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="332dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mentor_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/mentor_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/mentor_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/mentor_toolbar"
+        app:srcCompat="@drawable/ic_add"
+        android:background="@color/colorPrimary"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/course_mentor_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbars="vertical"
+        android:layout_margin="@dimen/list_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mentor_toolbar" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.c196;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import com.example.c196.database.CourseEntity;
@@ -15,9 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -45,8 +48,31 @@ public class CourseActivity extends AppCompatActivity {
     @BindView(R.id.course_note)
     TextView mCourseNote;
 
-    //@BindView(R.id.course_mentor_list)
-    //RecyclerView mRecyclerView;
+    @BindView(R.id.course_assessment_add)
+    ImageButton mAssessmentAdd;
+
+    @OnClick(R.id.course_assessment_add)
+    void assessmentAddClickHandler() {
+        Intent intent = new Intent(this, AssessmentEditorActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        startActivity(intent);
+    }
+
+    @BindView(R.id.course_assessment_list)
+    RecyclerView mAssessmentRecyclerView;
+
+    @BindView(R.id.course_mentor_add)
+    ImageButton mMentorAdd;
+
+    @OnClick(R.id.course_mentor_add)
+    void mentorAddClickHandler() {
+        Intent intent = new Intent(this, MentorEditorActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        startActivity(intent);
+    }
+
+    @BindView(R.id.course_mentor_list)
+    RecyclerView mMentorRecyclerView;
 
     @BindView(R.id.edit_course_fab)
     FloatingActionButton mFab;

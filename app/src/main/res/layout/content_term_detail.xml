@@ -102,6 +102,5 @@
         app:layout_constraintStart_toStartOf="@id/course_toolbar"
         app:layout_constraintTop_toTopOf="@id/course_toolbar"
         app:layout_constraintBottom_toBottomOf="@id/course_toolbar"
-
         tools:layout_editor_absoluteY="143dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
