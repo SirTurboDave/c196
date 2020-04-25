@@ -29,11 +29,12 @@ import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder> {
 
-    private int courseId;
+    private int termId;
     private final List<CourseEntity> mCourses;
     private final Context mContext;
 
-    public CoursesAdapter(int courseId, List<CourseEntity> mCourses, Context mContext) {
+    public CoursesAdapter(int termId, List<CourseEntity> mCourses, Context mContext) {
+        this.termId = termId;
         this.mCourses = mCourses;
         this.mContext = mContext;
     }

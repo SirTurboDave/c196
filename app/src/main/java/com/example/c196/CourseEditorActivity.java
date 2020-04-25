@@ -27,11 +27,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.example.c196.utilities.Constants.COURSE_ID_KEY;
+import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
 public class CourseEditorActivity extends AppCompatActivity {
 
     private CourseEditorViewModel mViewModel;
     private GregorianCalendar cal;
+    private int termId;
     private boolean mNewCourse;
 
     @BindView(R.id.course_name_edit)
@@ -51,15 +53,10 @@ public class CourseEditorActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setHomeAsUpIndicator(R.drawable.ic_check);
-
-        //TODO: Delete if not needed.
-        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.bind(this);
-
         initViewModel();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void initViewModel() {
@@ -77,9 +74,9 @@ public class CourseEditorActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             setTitle("Edit Course");
+            termId = extras.getInt(TERM_ID_KEY);
             int courseId = extras.getInt(COURSE_ID_KEY);
             mViewModel.loadCourseData(courseId);
-            //mViewModel.loadMentorData(mentorId);
         } else {
             setTitle("New Course");
             mNewCourse = true;
@@ -128,7 +125,8 @@ public class CourseEditorActivity extends AppCompatActivity {
             Date courseStartDate = DateFormatter.parse(courseStartDateText.getText().toString());
             Date courseEndDate = DateFormatter.parse(courseEndDateText.getText().toString());
 
-            mViewModel.saveCourse(mCourseName.getText().toString(), courseStartDate, courseEndDate);
+            mViewModel.saveCourse(termId, mCourseName.getText().toString(), courseStartDate,
+                    courseEndDate);
             finish();
         } catch (Exception e) {
             Log.v("Exception", Objects.requireNonNull(e.getMessage()));

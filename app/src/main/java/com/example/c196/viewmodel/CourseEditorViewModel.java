@@ -20,7 +20,6 @@ import java.util.concurrent.Executors;
 
 public class CourseEditorViewModel extends AndroidViewModel {
 
-    public MutableLiveData<MentorEntity> mLiveMentor = new MutableLiveData<>();
     public MutableLiveData<CourseEntity> mLiveCourse = new MutableLiveData<>();
 
     private AppRepository mRepository;
@@ -38,21 +37,16 @@ public class CourseEditorViewModel extends AndroidViewModel {
         });
     }
 
-    public void loadMentorData(int mentorId) {
-        executor.execute(() -> {
-            MentorEntity mentor = mRepository.getMentorById(mentorId);
-            mLiveMentor.postValue(mentor);
-        });
-    }
-
-    public void saveCourse(String courseName, Date courseStartDate, Date courseEndDate) {
+    public void saveCourse(int termId, String courseName, Date courseStartDate, Date courseEndDate) {
         CourseEntity course = mLiveCourse.getValue();
 
         if (course == null) {
             if (TextUtils.isEmpty(courseName.trim())) {
                 return;
             }
-            course = new CourseEntity(courseName.trim(), courseStartDate, courseEndDate);
+            System.out.println(termId);
+            course = new CourseEntity(termId, courseName.trim(), courseStartDate, courseEndDate,
+                    "", "");
         } else {
             course.setCourseName(courseName.trim());
             course.setCourseStartDate(courseStartDate);

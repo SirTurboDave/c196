@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.c196.database.AppRepository;
+import com.example.c196.database.AssessmentEntity;
 import com.example.c196.database.CourseEntity;
 import com.example.c196.database.MentorEntity;
 import com.example.c196.database.TermEntity;
@@ -39,5 +40,9 @@ public class CourseViewModel extends AndroidViewModel {
 
     public LiveData<List<MentorEntity>> getMentorsByCourseId(final int courseId) {
         return mRepository.getMentorsByCourseId(courseId);
+    }
+
+    public LiveData<List<AssessmentEntity>> getAssessmentsByCourseid(int courseId) {
+        return mRepository.getAssessmentsByCourseId(courseId);
     }
 }

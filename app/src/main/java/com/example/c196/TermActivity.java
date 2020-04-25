@@ -55,6 +55,7 @@ public class TermActivity extends AppCompatActivity {
     @OnClick(R.id.add_course_fab)
     void fabClickHandler() {
         Intent intent = new Intent(this, CourseEditorActivity.class);
+        intent.putExtra(TERM_ID_KEY, termId);
         startActivity(intent);
     }
 
@@ -81,7 +82,6 @@ public class TermActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-
         TermViewModel mViewModel = ViewModelProviders.of(this)
                 .get(TermViewModel.class);
 

@@ -35,22 +35,15 @@ public class AppRepository {
     }
 
     public void addSampleData() {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.termDao().insertAll(SampleData.getTerms());
-                mDb.courseDao().insertAll(SampleData.getCourses());
-            }
+        executor.execute(() -> {
+            mDb.termDao().insertAll(SampleData.getTerms());
+            mDb.courseDao().insertAll(SampleData.getCourses());
+            mDb.assessmentDao().insertAll(SampleData.getAssessments());
         });
     }
 
     public void deleteAllTerms() {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.termDao().deleteAll();
-            }
-        });
+        executor.execute(() -> mDb.termDao().deleteAll());
     }
 
     public TermEntity getTermById(int termId) {
@@ -70,12 +63,7 @@ public class AppRepository {
     }
 
     public void deleteAllCourses() {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.courseDao().deleteAll();
-            }
-        });
+        executor.execute(() -> mDb.courseDao().deleteAll());
     }
 
     public CourseEntity getCourseById(int courseId) {
@@ -105,5 +93,9 @@ public class AppRepository {
 
     public void insertCourse(CourseEntity course) {
         executor.execute(() -> mDb.courseDao().insertCourse(course));
+    }
+
+    public LiveData<List<AssessmentEntity>> getAssessmentsByCourseId(int courseId) {
+        return mDb.assessmentDao().getAssessmentsByCourseId(courseId);
     }
 }

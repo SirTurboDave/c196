@@ -12,8 +12,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.c196.viewmodel.CourseViewModel;
 
-@Database(entities = {TermEntity.class, CourseEntity.class, MentorEntity.class}, version = 3,
-        exportSchema = false)
+@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class,
+        MentorEntity.class}, version = 5, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "C196Database.db";
@@ -22,6 +22,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TermDao termDao();
     public abstract CourseDao courseDao();
+    public abstract AssessmentDao assessmentDao();
     public abstract MentorDao mentorDao();
 
     public static AppDatabase getInstance(Context context) {

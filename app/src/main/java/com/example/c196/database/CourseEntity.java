@@ -15,10 +15,10 @@ public class CourseEntity {
     private Date courseStartDate;
     private Date courseEndDate;
     private String courseStatus;
-    private String courseMentor;
-    private String courseMentorPhone;
-    private String courseMentorEmail;
     private String courseNote;
+    private int courseAssessmentId;
+    private int courseMentorId;
+
 
     @Ignore
     public CourseEntity() {
@@ -26,32 +26,24 @@ public class CourseEntity {
 
 
     public CourseEntity(int id, int termId, String courseName, Date courseStartDate,
-                        Date courseEndDate, String courseStatus, String courseMentor,
-                        String courseMentorPhone, String courseMentorEmail, String courseNote) {
+                        Date courseEndDate, String courseStatus, String courseNote) {
         this.id = id;
         this.termId = termId;
         this.courseName = courseName;
         this.courseStartDate = courseStartDate;
         this.courseEndDate = courseEndDate;
         this.courseStatus = courseStatus;
-        this.courseMentor = courseMentor;
-        this.courseMentorPhone = courseMentorPhone;
-        this.courseMentorEmail = courseMentorEmail;
         this.courseNote = courseNote;
     }
 
     @Ignore
     public CourseEntity(int termId, String courseName, Date courseStartDate, Date courseEndDate,
-                        String courseStatus, String courseMentor, String courseMentorPhone,
-                        String courseMentorEmail, String courseNote) {
+                        String courseStatus, String courseNote) {
         this.termId = termId;
         this.courseName = courseName;
         this.courseStartDate = courseStartDate;
         this.courseEndDate = courseEndDate;
         this.courseStatus = courseStatus;
-        this.courseMentor = courseMentor;
-        this.courseMentorPhone = courseMentorPhone;
-        this.courseMentorEmail = courseMentorEmail;
         this.courseNote = courseNote;
     }
 
@@ -110,36 +102,28 @@ public class CourseEntity {
         this.courseStatus = courseStatus;
     }
 
-    public String getCourseMentor() {
-        return courseMentor;
-    }
-
-    public void setCourseMentor(String courseMentor) {
-        this.courseMentor = courseMentor;
-    }
-
-    public String getCourseMentorPhone() {
-        return courseMentorPhone;
-    }
-
-    public void setCourseMentorPhone(String courseMentorPhone) {
-        this.courseMentorPhone = courseMentorPhone;
-    }
-
-    public String getCourseMentorEmail() {
-        return courseMentorEmail;
-    }
-
-    public void setCourseMentorEmail(String courseMentorEmail) {
-        this.courseMentorEmail = courseMentorEmail;
-    }
-
     public String getCourseNote() {
         return courseNote;
     }
 
     public void setCourseNote(String courseNote) {
         this.courseNote = courseNote;
+    }
+
+    public int getCourseAssessmentId() {
+        return courseAssessmentId;
+    }
+
+    public void setCourseAssessmentId(int courseAssessmentId) {
+        this.courseAssessmentId = courseAssessmentId;
+    }
+
+    public int getCourseMentorId() {
+        return courseMentorId;
+    }
+
+    public void setCourseMentorId(int courseMentorId) {
+        this.courseMentorId = courseMentorId;
     }
 
     @Override
@@ -151,9 +135,6 @@ public class CourseEntity {
                 ", courseStartDate=" + courseStartDate +
                 ", courseEndDate=" + courseEndDate +
                 ", courseStatus='" + courseStatus + '\'' +
-                ", courseMentor='" + courseMentor + '\'' +
-                ", courseMentorPhone='" + courseMentorPhone + '\'' +
-                ", courseMentorEmail='" + courseMentorEmail + '\'' +
                 ", courseNote='" + courseNote + '\'' +
                 '}';
     }

@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 
+import com.example.c196.database.AssessmentEntity;
 import com.example.c196.database.CourseEntity;
 import com.example.c196.database.MentorEntity;
+import com.example.c196.ui.AssessmentsAdapter;
 import com.example.c196.ui.CoursesAdapter;
 import com.example.c196.utilities.DateFormatter;
 import com.example.c196.viewmodel.CourseViewModel;
@@ -16,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
@@ -87,6 +90,9 @@ public class CourseActivity extends AppCompatActivity {
     private int courseId;
     private boolean mNewCourse;
 
+    private List<AssessmentEntity> assessmentsData = new ArrayList<>();
+    private AssessmentsAdapter mAssessmentsAdapter;
+    
     private List<MentorEntity> mentorsData = new ArrayList<>();
     //private MentorsAdapter mAdapter;
 
@@ -98,7 +104,17 @@ public class CourseActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+        initRecyclerView();
         initViewModel();
+    }
+
+    private void initRecyclerView() {
+        mAssessmentRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mAssessmentRecyclerView.setLayoutManager(layoutManager);
+
+        mAssessmentsAdapter = new AssessmentsAdapter(courseId, assessmentsData, this);
+        mAssessmentRecyclerView.setAdapter(mAssessmentsAdapter);
     }
 
     private void initViewModel() {
@@ -113,10 +129,24 @@ public class CourseActivity extends AppCompatActivity {
             mCourseNote.setText(courseEntity.getCourseNote());
         });
 
+        final Observer<List<AssessmentEntity>> assessmentsObserver = assessmentEntities -> {
+            assessmentsData.clear();
+            assessmentsData.addAll(assessmentEntities);
+
+            if (mAssessmentsAdapter == null) {
+                mAssessmentsAdapter = new AssessmentsAdapter(courseId, assessmentsData,
+                        CourseActivity.this);
+                mAssessmentRecyclerView.setAdapter(mAssessmentsAdapter);
+            } else {
+                mAssessmentsAdapter.notifyDataSetChanged();
+            }
+        };
+
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
             courseId = extras.getInt(COURSE_ID_KEY);
+            mViewModel.getAssessmentsByCourseid(courseId).observe(this, assessmentsObserver);
             mViewModel.loadData(courseId);
         } else {
             setTitle("New Course");
