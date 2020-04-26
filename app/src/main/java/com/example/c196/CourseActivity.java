@@ -9,6 +9,7 @@ import com.example.c196.database.CourseEntity;
 import com.example.c196.database.MentorEntity;
 import com.example.c196.ui.AssessmentsAdapter;
 import com.example.c196.ui.CoursesAdapter;
+import com.example.c196.ui.MentorsAdapter;
 import com.example.c196.utilities.DateFormatter;
 import com.example.c196.viewmodel.CourseViewModel;
 import com.example.c196.viewmodel.TermViewModel;
@@ -90,13 +91,12 @@ public class CourseActivity extends AppCompatActivity {
 
     private int termId;
     private int courseId;
-    private boolean mNewCourse;
 
     private List<AssessmentEntity> assessmentsData = new ArrayList<>();
     private AssessmentsAdapter mAssessmentsAdapter;
     
     private List<MentorEntity> mentorsData = new ArrayList<>();
-    //private MentorsAdapter mAdapter;
+    private MentorsAdapter mMentorsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,11 +112,18 @@ public class CourseActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         mAssessmentRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mAssessmentRecyclerView.setLayoutManager(layoutManager);
+        LinearLayoutManager assessmentLayoutManager = new LinearLayoutManager(this);
+        mAssessmentRecyclerView.setLayoutManager(assessmentLayoutManager);
+
+        mMentorRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager mentorLayoutManager = new LinearLayoutManager(this);
+        mMentorRecyclerView.setLayoutManager(mentorLayoutManager);
 
         mAssessmentsAdapter = new AssessmentsAdapter(courseId, assessmentsData, this);
         mAssessmentRecyclerView.setAdapter(mAssessmentsAdapter);
+
+        mMentorsAdapter = new MentorsAdapter(courseId, mentorsData, this);
+        mMentorRecyclerView.setAdapter(mMentorsAdapter);
     }
 
     private void initViewModel() {
@@ -144,25 +151,35 @@ public class CourseActivity extends AppCompatActivity {
             }
         };
 
+        final Observer<List<MentorEntity>> mentorsObserver = mentorEntities -> {
+            mentorsData.clear();
+            mentorsData.addAll(mentorEntities);
+
+            if (mMentorsAdapter == null) {
+                mMentorsAdapter = new MentorsAdapter(courseId, mentorsData,
+                        CourseActivity.this);
+                mMentorRecyclerView.setAdapter(mMentorsAdapter);
+            } else {
+                mMentorsAdapter.notifyDataSetChanged();
+            }
+        };
+
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
             termId = extras.getInt(TERM_ID_KEY);
             courseId = extras.getInt(COURSE_ID_KEY);
             mViewModel.getAssessmentsByCourseid(courseId).observe(this, assessmentsObserver);
+            mViewModel.getMentorsByCourseId(courseId).observe(this, mentorsObserver);
             mViewModel.loadData(courseId);
-        } else {
-            setTitle("New Course");
-            mNewCourse = true;
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNewCourse) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_course, menu);
-        }
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_course, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 }

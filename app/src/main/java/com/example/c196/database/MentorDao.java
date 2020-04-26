@@ -30,4 +30,7 @@ public interface MentorDao {
 
     @Query("select * from mentors where courseId = :courseId")
     LiveData<List<MentorEntity>> getMentorsByCourseId(int courseId);
+
+    @Query("delete from mentors")
+    void deleteAll();
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">WGU Term Tracker</string>
     <string name="action_add_sample_data">Add sample data</string>
     <string name="title_activity_term_detail">TermDetailActivity</string>
     <string name="title_activity_term_editor">TermEditorActivity</string>
@@ -24,7 +24,6 @@
     <string name="course_note_label">Note</string>
     <string name="course_note">Course Note</string>
     <string name="title_activity_course_editor">CourseEditorActivity</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="edit">Edit</string>
     <string name="assessments">Assessments</string>
     <string name="mentors">Mentors</string>
@@ -33,4 +32,5 @@
     <string name="mentor_name">Mentor Name</string>
     <string name="mentor_phone">Mentor Phone</string>
     <string name="mentor_email">Mentor Email</string>
+    <string name="title_activity_mentor_detail">MentorActivity</string>
 </resources>

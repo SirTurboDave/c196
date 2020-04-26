@@ -10,9 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MentorActivity"
+            android:label="@string/title_activity_mentor_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".AssessmentEditorActivity"
             android:label="@string/title_activity_assessment_editor"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MentorEditorActivity"
             android:label="@string/title_activity_mentor_editor"

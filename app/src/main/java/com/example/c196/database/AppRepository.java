@@ -15,9 +15,8 @@ public class AppRepository {
 
     public LiveData<List<TermEntity>> mTerms;
     public LiveData<List<CourseEntity>> mCourses;
+    public LiveData<List<AssessmentEntity>> mAssessments;
     public LiveData<List<MentorEntity>> mMentors;
-    public List<CourseEntity> mCoursesByTerm;
-    public List<MentorEntity> mMentorsByCourse;
     private AppDatabase mDb;
     private Executor executor = Executors.newSingleThreadExecutor();
 
@@ -32,6 +31,8 @@ public class AppRepository {
         mDb = AppDatabase.getInstance(context);
         mTerms = getAllTerms();
         mCourses = getAllCourses();
+        mAssessments = getAllAssessments();
+        mMentors = getAllMentors();
     }
 
     public void addSampleData() {
@@ -39,6 +40,7 @@ public class AppRepository {
             mDb.termDao().insertAll(SampleData.getTerms());
             mDb.courseDao().insertAll(SampleData.getCourses());
             mDb.assessmentDao().insertAll(SampleData.getAssessments());
+            mDb.mentorDao().insertAll(SampleData.getMentors());
         });
     }
 
@@ -73,6 +75,8 @@ public class AppRepository {
     public void deleteSampleData() {
         deleteAllTerms();
         deleteAllCourses();
+        deleteAllAssessments();
+        deleteAllMentors();
     }
 
     public void insertTerm(TermEntity term) {
@@ -95,8 +99,16 @@ public class AppRepository {
         executor.execute(() -> mDb.courseDao().insertCourse(course));
     }
 
+    public LiveData<List<AssessmentEntity>> getAllAssessments() {
+        return mDb.assessmentDao().getAll();
+    }
+
     public LiveData<List<AssessmentEntity>> getAssessmentsByCourseId(int courseId) {
         return mDb.assessmentDao().getAssessmentsByCourseId(courseId);
+    }
+
+    private void deleteAllAssessments() {
+        executor.execute(() -> mDb.assessmentDao().deleteAll());
     }
 
     public void deleteCourse(CourseEntity course) {
@@ -109,5 +121,13 @@ public class AppRepository {
 
     public void deleteMentor(MentorEntity mentor) {
         executor.execute(() -> mDb.mentorDao().deleteMentor(mentor));
+    }
+
+    public LiveData<List<MentorEntity>> getAllMentors() {
+        return mDb.mentorDao().getAll();
+    }
+
+    private void deleteAllMentors() {
+        executor.execute(() -> mDb.mentorDao().deleteAll());
     }
 }
