@@ -109,9 +109,6 @@ public class TermActivity extends AppCompatActivity {
             termId = extras.getInt(TERM_ID_KEY);
             mViewModel.getCoursesByTermId(termId).observe(this, coursesObserver);
             mViewModel.loadData(termId);
-        } else {
-            setTitle("New Term");
-            mNewTerm = true;
         }
     }
 
@@ -140,5 +137,11 @@ public class TermActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

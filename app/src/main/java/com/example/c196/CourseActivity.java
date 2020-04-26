@@ -83,10 +83,12 @@ public class CourseActivity extends AppCompatActivity {
     @OnClick(R.id.edit_course_fab)
     void fabClickHandler() {
         Intent intent = new Intent(this, CourseEditorActivity.class);
+        intent.putExtra(TERM_ID_KEY, termId);
         intent.putExtra(COURSE_ID_KEY, courseId);
         startActivity(intent);
     }
 
+    private int termId;
     private int courseId;
     private boolean mNewCourse;
 
@@ -145,6 +147,7 @@ public class CourseActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
+            termId = extras.getInt(TERM_ID_KEY);
             courseId = extras.getInt(COURSE_ID_KEY);
             mViewModel.getAssessmentsByCourseid(courseId).observe(this, assessmentsObserver);
             mViewModel.loadData(courseId);

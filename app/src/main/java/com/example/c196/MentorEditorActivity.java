@@ -2,6 +2,7 @@ package com.example.c196;
 
 import android.os.Bundle;
 
+import com.example.c196.viewmodel.MentorEditorViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -11,6 +12,10 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 public class MentorEditorActivity extends AppCompatActivity {
+
+    private MentorEditorViewModel mViewModel;
+    private int courseId;
+    private boolean mNewMentor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,6 +2,7 @@ package com.example.c196;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -112,10 +113,24 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (!mNewCourse) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_course_editor, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             saveAndReturn();
             return true;
+        } else if (item.getItemId() == R.id.action_delete) {
+            mViewModel.deleteCourse();
+            Intent intent = new Intent(this, TermActivity.class);
+            intent.putExtra(TERM_ID_KEY, termId);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

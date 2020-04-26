@@ -98,4 +98,16 @@ public class AppRepository {
     public LiveData<List<AssessmentEntity>> getAssessmentsByCourseId(int courseId) {
         return mDb.assessmentDao().getAssessmentsByCourseId(courseId);
     }
+
+    public void deleteCourse(CourseEntity course) {
+        executor.execute(() -> mDb.courseDao().deleteCourse(course));
+    }
+
+    public void insertMentor(MentorEntity mentor) {
+        executor.execute(() -> mDb.mentorDao().insertMentor(mentor));
+    }
+
+    public void deleteMentor(MentorEntity mentor) {
+        executor.execute(() -> mDb.mentorDao().deleteMentor(mentor));
+    }
 }

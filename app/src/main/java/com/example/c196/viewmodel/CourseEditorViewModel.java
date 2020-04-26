@@ -44,7 +44,6 @@ public class CourseEditorViewModel extends AndroidViewModel {
             if (TextUtils.isEmpty(courseName.trim())) {
                 return;
             }
-            System.out.println(termId);
             course = new CourseEntity(termId, courseName.trim(), courseStartDate, courseEndDate,
                     "", "");
         } else {
@@ -53,5 +52,9 @@ public class CourseEditorViewModel extends AndroidViewModel {
             course.setCourseEndDate(courseEndDate);
         }
         mRepository.insertCourse(course);
+    }
+
+    public void deleteCourse() {
+        mRepository.deleteCourse(mLiveCourse.getValue());
     }
 }
