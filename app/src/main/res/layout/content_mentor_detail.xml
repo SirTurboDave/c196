@@ -8,84 +8,103 @@
 
     <TextView
         android:id="@+id/mentor_name"
-        android:layout_width="110dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="120dp"
         android:autofillHints="@string/mentor_name"
         android:gravity="end"
         android:text="@string/mentor_name"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toEndOf="@id/mentor_name_label"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/mentor_name_label"
-        android:layout_width="wrap_content"
+        android:layout_width="135dp"
         android:layout_height="40dp"
+        android:layout_marginTop="24dp"
         android:gravity="end"
         android:labelFor="@id/mentor_name"
-        android:paddingStart="20dp"
-        android:paddingEnd="5dp"
         android:text="@string/mentor_name"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
-        app:layout_constraintEnd_toStartOf="@+id/mentor_name"
-        app:layout_constraintTop_toTopOf="@+id/mentor_name" />
+        android:textSize="@dimen/list_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/mentor_phone"
-        android:layout_width="110dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginEnd="120dp"
         android:autofillHints="@string/mentor_phone"
         android:gravity="end"
         android:text="@string/mentor_phone"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@id/mentor_phone_label"
         app:layout_constraintTop_toBottomOf="@+id/mentor_name" />
 
     <TextView
         android:id="@+id/mentor_phone_label"
-        android:layout_width="wrap_content"
+        android:layout_width="135dp"
         android:layout_height="40dp"
         android:gravity="end"
         android:labelFor="@id/mentor_phone"
-        android:paddingStart="20dp"
-        android:paddingEnd="5dp"
         android:text="@string/mentor_phone"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
-        app:layout_constraintEnd_toStartOf="@+id/mentor_phone"
+        android:textSize="@dimen/list_text_size"
+        app:layout_constraintBottom_toTopOf="@id/mentor_email_label"
+        app:layout_constraintEnd_toEndOf="@+id/mentor_name_label"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/mentor_name_label" />
 
     <TextView
         android:id="@+id/mentor_email"
-        android:layout_width="110dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginEnd="120dp"
         android:autofillHints="@string/mentor_email"
         android:gravity="end"
         android:text="@string/mentor_email"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toEndOf="@id/mentor_email_label"
         app:layout_constraintTop_toBottomOf="@+id/mentor_phone" />
 
     <TextView
         android:id="@+id/mentor_email_label"
-        android:layout_width="wrap_content"
+        android:layout_width="135dp"
         android:layout_height="40dp"
         android:gravity="end"
         android:labelFor="@id/mentor_email"
         android:paddingStart="20dp"
         android:paddingEnd="5dp"
         android:text="@string/mentor_email"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
-        app:layout_constraintEnd_toStartOf="@+id/mentor_email"
+        android:textSize="@dimen/list_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/mentor_phone_label"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@id/mentor_phone_label" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="55dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="25dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

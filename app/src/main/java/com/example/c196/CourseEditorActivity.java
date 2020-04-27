@@ -8,24 +8,32 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.c196.database.CourseEntity;
 import com.example.c196.utilities.DateFormatter;
 import com.example.c196.viewmodel.CourseEditorViewModel;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemSelected;
 
 import static com.example.c196.utilities.Constants.COURSE_ID_KEY;
 import static com.example.c196.utilities.Constants.TERM_ID_KEY;
@@ -35,7 +43,11 @@ public class CourseEditorActivity extends AppCompatActivity {
     private CourseEditorViewModel mViewModel;
     private GregorianCalendar cal;
     private int termId;
+    private int courseStatus;
     private boolean mNewCourse;
+    private ArrayAdapter<CharSequence> adapter;
+    private List<CharSequence> items;
+    private String[] courseStatusArray;
 
     @BindView(R.id.course_name_edit)
     EditText mCourseName;
@@ -45,6 +57,12 @@ public class CourseEditorActivity extends AppCompatActivity {
 
     @BindView(R.id.course_end_date_edit)
     EditText courseEndDateText;
+
+    @BindView(R.id.course_status_spinner)
+    Spinner courseStatusSpinner;
+
+    @BindView(R.id.course_note_edit)
+    EditText mCourseNote;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -58,6 +76,7 @@ public class CourseEditorActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         initViewModel();
+        initSpinner();
     }
 
     private void initViewModel() {
@@ -69,6 +88,9 @@ public class CourseEditorActivity extends AppCompatActivity {
                 mCourseName.setText(courseEntity.getCourseName());
                 courseStartDateText.setText(DateFormatter.format(courseEntity.getCourseStartDate()));
                 courseEndDateText.setText(DateFormatter.format(courseEntity.getCourseEndDate()));
+                courseStatus = courseEntity.getCourseStatus();
+                courseStatusSpinner.setSelection(courseStatus);
+                mCourseNote.setText(courseEntity.getCourseNote());
             }
         }));
 
@@ -82,6 +104,16 @@ public class CourseEditorActivity extends AppCompatActivity {
             setTitle("New Course");
             mNewCourse = true;
         }
+    }
+
+    private void initSpinner() {
+        courseStatusArray = getResources().getStringArray(R.array.course_status_array);
+        items = new ArrayList<>(Arrays.asList(courseStatusArray));
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, items);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        courseStatusSpinner.setAdapter(adapter);
     }
 
     @OnClick(R.id.course_edit_start_date_fab)
@@ -112,6 +144,11 @@ public class CourseEditorActivity extends AppCompatActivity {
                 cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
     }
 
+    @OnItemSelected(R.id.course_status_spinner)
+    void onItemSelected(int position) {
+        courseStatus = position;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNewCourse) {
@@ -140,8 +177,9 @@ public class CourseEditorActivity extends AppCompatActivity {
             Date courseStartDate = DateFormatter.parse(courseStartDateText.getText().toString());
             Date courseEndDate = DateFormatter.parse(courseEndDateText.getText().toString());
 
+
             mViewModel.saveCourse(termId, mCourseName.getText().toString(), courseStartDate,
-                    courseEndDate);
+                    courseEndDate, courseStatus, mCourseNote.getText().toString());
             finish();
         } catch (Exception e) {
             Log.v("Exception", Objects.requireNonNull(e.getMessage()));

@@ -14,7 +14,7 @@ public class CourseEntity {
     private String courseName;
     private Date courseStartDate;
     private Date courseEndDate;
-    private String courseStatus;
+    private int courseStatus;
     private String courseNote;
     private int courseAssessmentId;
     private int courseMentorId;
@@ -24,9 +24,8 @@ public class CourseEntity {
     public CourseEntity() {
     }
 
-
     public CourseEntity(int id, int termId, String courseName, Date courseStartDate,
-                        Date courseEndDate, String courseStatus, String courseNote) {
+                        Date courseEndDate, int courseStatus, String courseNote) {
         this.id = id;
         this.termId = termId;
         this.courseName = courseName;
@@ -38,7 +37,7 @@ public class CourseEntity {
 
     @Ignore
     public CourseEntity(int termId, String courseName, Date courseStartDate, Date courseEndDate,
-                        String courseStatus, String courseNote) {
+                        int courseStatus, String courseNote) {
         this.termId = termId;
         this.courseName = courseName;
         this.courseStartDate = courseStartDate;
@@ -94,11 +93,11 @@ public class CourseEntity {
         this.courseEndDate = courseEndDate;
     }
 
-    public String getCourseStatus() {
+    public int getCourseStatus() {
         return courseStatus;
     }
 
-    public void setCourseStatus(String courseStatus) {
+    public void setCourseStatus(int courseStatus) {
         this.courseStatus = courseStatus;
     }
 

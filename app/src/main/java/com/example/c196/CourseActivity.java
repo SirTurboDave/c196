@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -78,17 +79,6 @@ public class CourseActivity extends AppCompatActivity {
     @BindView(R.id.course_mentor_list)
     RecyclerView mMentorRecyclerView;
 
-    @BindView(R.id.edit_course_fab)
-    FloatingActionButton mFab;
-
-    @OnClick(R.id.edit_course_fab)
-    void fabClickHandler() {
-        Intent intent = new Intent(this, CourseEditorActivity.class);
-        intent.putExtra(TERM_ID_KEY, termId);
-        intent.putExtra(COURSE_ID_KEY, courseId);
-        startActivity(intent);
-    }
-
     private int termId;
     private int courseId;
 
@@ -102,7 +92,7 @@ public class CourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.course_toolbar);
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
@@ -134,7 +124,14 @@ public class CourseActivity extends AppCompatActivity {
             Objects.requireNonNull(getSupportActionBar()).setTitle(courseEntity.getCourseName());
             mCourseStartDate.setText(DateFormatter.format(courseEntity.getCourseStartDate()));
             mCourseEndDate.setText(DateFormatter.format(courseEntity.getCourseEndDate()));
-            mCourseStatus.setText(courseEntity.getCourseStatus());
+            switch(courseEntity.getCourseStatus()) {
+                case 0:
+                    mCourseStatus.setText(R.string.in_progress);
+                    break;
+                case 1:
+                    mCourseStatus.setText(R.string.completed);
+                    break;
+            }
             mCourseNote.setText(courseEntity.getCourseNote());
         });
 
@@ -181,5 +178,18 @@ public class CourseActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_course, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_edit:
+                Intent intent = new Intent(this, CourseEditorActivity.class);
+                intent.putExtra(TERM_ID_KEY, termId);
+                intent.putExtra(COURSE_ID_KEY, courseId);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

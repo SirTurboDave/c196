@@ -33,4 +33,11 @@
     <string name="mentor_phone">Mentor Phone</string>
     <string name="mentor_email">Mentor Email</string>
     <string name="title_activity_mentor_detail">MentorActivity</string>
+    <string name="in_progress">In Progress</string>
+    <string name="completed">Completed</string>
+    <string name="enter_note">Enter note</string>
+    <string-array name="course_status_array">
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
 </resources>

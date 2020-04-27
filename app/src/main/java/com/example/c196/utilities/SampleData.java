@@ -50,7 +50,7 @@ public class SampleData {
 
     public static final String SAMPLE_MENTOR_1 = "Jebediah Jones";
     public static final String SAMPLE_MENTOR_2 = "Ron Burgundy";
-    public static final String SAMPLE_MENTOR_3 = "Stonewall Jackson";
+    public static final String SAMPLE_MENTOR_3 = "Tim Taylor";
     public static final String SAMPLE_MENTOR_4 = "Jack Skellington";
     public static final String SAMPLE_MENTOR_5 = "Mary Shelley";
 
@@ -109,29 +109,29 @@ public class SampleData {
     public static List<CourseEntity> getCourses() {
         List<CourseEntity> courses = new ArrayList<>();
         courses.add(new CourseEntity(1,1, SAMPLE_COURSE_1, getCourseStartDate(0),
-                getCourseEndDate(0),"test", "testNote"));
+                getCourseEndDate(0),0, "testNote"));
         courses.add(new CourseEntity(2,1, SAMPLE_COURSE_2, getCourseStartDate(1),
-                getCourseEndDate(1),"test", "testNote"));
+                getCourseEndDate(1),1, "testNote"));
         courses.add(new CourseEntity(3,1, SAMPLE_COURSE_3, getCourseStartDate(2),
-                getCourseEndDate(2),"test", "testNote"));
+                getCourseEndDate(2),0, "testNote"));
         courses.add(new CourseEntity(4,2, SAMPLE_COURSE_4, getCourseStartDate(3),
-                getCourseEndDate(3),"test", "testNote"));
+                getCourseEndDate(3),1, "testNote"));
         courses.add(new CourseEntity(5,2, SAMPLE_COURSE_5, getCourseStartDate(4),
-                getCourseEndDate(4),"test", "testNote"));
+                getCourseEndDate(4),0, "testNote"));
         courses.add(new CourseEntity(6,2, SAMPLE_COURSE_6, getCourseStartDate(5),
-                getCourseEndDate(5),"test", "testNote"));
+                getCourseEndDate(5),1, "testNote"));
         courses.add(new CourseEntity(7,3, SAMPLE_COURSE_7, getCourseStartDate(6),
-                getCourseEndDate(6),"test", "testNote"));
+                getCourseEndDate(6),0, "testNote"));
         courses.add(new CourseEntity(8,3, SAMPLE_COURSE_8, getCourseStartDate(7),
-                getCourseEndDate(7),"test", "testNote"));
+                getCourseEndDate(7),1, "testNote"));
         courses.add(new CourseEntity(9,3, SAMPLE_COURSE_9, getCourseStartDate(8),
-                getCourseEndDate(8),"test", "testNote"));
+                getCourseEndDate(8),0, "testNote"));
         courses.add(new CourseEntity(10,4, SAMPLE_COURSE_10, getCourseStartDate(9),
-                getCourseEndDate(9),"test", "testNote"));
+                getCourseEndDate(9),1, "testNote"));
         courses.add(new CourseEntity(11,4, SAMPLE_COURSE_11, getCourseStartDate(10),
-                getCourseEndDate(10),"test", "testNote"));
+                getCourseEndDate(10),0, "testNote"));
         courses.add(new CourseEntity(12,4, SAMPLE_COURSE_12, getCourseStartDate(11),
-                getCourseEndDate(11),"test", "testNote"));
+                getCourseEndDate(11),1, "testNote"));
         return courses;
     }
 
@@ -195,8 +195,6 @@ public class SampleData {
         mentors.add(new MentorEntity(10,10, SAMPLE_MENTOR_5, "999-999-9999",
                 "mentor@example.com"));
         mentors.add(new MentorEntity(11,11, SAMPLE_MENTOR_1, "999-999-9999",
-                "mentor@example.com"));
-        mentors.add(new MentorEntity(12,12, SAMPLE_MENTOR_2, "999-999-9999",
                 "mentor@example.com"));
         return mentors;
     }

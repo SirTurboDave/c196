@@ -48,6 +48,7 @@ public class MentorActivity extends AppCompatActivity {
 
         mViewModel.mLiveMentor.observe(this, mentorEntity -> {
             getSupportActionBar().setTitle(mentorEntity.getMentorName());
+            mMentorName.setText(mentorEntity.getMentorName());
             mMentorPhone.setText(mentorEntity.getMentorPhone());
             mMentorEmail.setText(mentorEntity.getMentorEmail());
         });
