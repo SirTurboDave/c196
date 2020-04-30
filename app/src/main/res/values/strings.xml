@@ -36,6 +36,9 @@
     <string name="in_progress">In Progress</string>
     <string name="completed">Completed</string>
     <string name="enter_note">Enter note</string>
+    <string name="add_mentor">Add mentor</string>
+    <string name="add_assessment">Add assessment</string>
+    <string name="assessment_name">Assessment Name</string>
     <string-array name="course_status_array">
         <item>In Progress</item>
         <item>Completed</item>

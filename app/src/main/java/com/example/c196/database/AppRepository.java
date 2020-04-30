@@ -130,4 +130,8 @@ public class AppRepository {
     private void deleteAllMentors() {
         executor.execute(() -> mDb.mentorDao().deleteAll());
     }
+
+    public AssessmentEntity getAssessmentById(int assessmentId) {
+        return mDb.assessmentDao().getAssessmentById(assessmentId);
+    }
 }
