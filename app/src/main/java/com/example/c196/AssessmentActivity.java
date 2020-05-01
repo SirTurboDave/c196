@@ -1,8 +1,10 @@
 package com.example.c196;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import butterknife.ButterKnife;
 
 import static com.example.c196.utilities.Constants.ASSESSMENT_ID_KEY;
 import static com.example.c196.utilities.Constants.COURSE_ID_KEY;
+import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
 public class AssessmentActivity extends AppCompatActivity {
 
@@ -58,6 +61,18 @@ public class AssessmentActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_assessment, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_edit:
+                Intent intent = new Intent(this, AssessmentEditorActivity.class);
+                intent.putExtra(ASSESSMENT_ID_KEY, assessmentId);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

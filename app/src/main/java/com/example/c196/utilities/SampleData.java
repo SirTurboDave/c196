@@ -138,37 +138,37 @@ public class SampleData {
     public static List<AssessmentEntity> getAssessments() {
         List<AssessmentEntity> assessments = new ArrayList<>();
         assessments.add(new AssessmentEntity(1,1, SAMPLE_ASSESSMENT_1,
-                "Objective", getCourseEndDate(0)));
+                0, getCourseEndDate(0)));
         assessments.add(new AssessmentEntity(2,1, SAMPLE_ASSESSMENT_2,
-                "Performance", getCourseEndDate(0)));
+                1, getCourseEndDate(0)));
         assessments.add(new AssessmentEntity(3,1, SAMPLE_ASSESSMENT_3,
-                "Performance", getCourseEndDate(0)));
+                1, getCourseEndDate(0)));
         assessments.add(new AssessmentEntity(4,1, SAMPLE_ASSESSMENT_4,
-                "Objective", getCourseEndDate(0)));
+                0, getCourseEndDate(0)));
         assessments.add(new AssessmentEntity(5,1, SAMPLE_ASSESSMENT_5,
-                "Performance", getCourseEndDate(0)));
+                1, getCourseEndDate(0)));
         assessments.add(new AssessmentEntity(6,2, SAMPLE_ASSESSMENT_6,
-                "Objective", getCourseEndDate(1)));
+                0, getCourseEndDate(1)));
         assessments.add(new AssessmentEntity(7,3, SAMPLE_ASSESSMENT_7,
-                "Performance", getCourseEndDate(2)));
+                1, getCourseEndDate(2)));
         assessments.add(new AssessmentEntity(8,4, SAMPLE_ASSESSMENT_8,
-                "Objective", getCourseEndDate(3)));
+                0, getCourseEndDate(3)));
         assessments.add(new AssessmentEntity(9,5, SAMPLE_ASSESSMENT_9,
-                "Performance", getCourseEndDate(4)));
+                1, getCourseEndDate(4)));
         assessments.add(new AssessmentEntity(10,6, SAMPLE_ASSESSMENT_10,
-                "Objective", getCourseEndDate(5)));
+                0, getCourseEndDate(5)));
         assessments.add(new AssessmentEntity(11,7, SAMPLE_ASSESSMENT_11,
-                "Performance", getCourseEndDate(6)));
+                1, getCourseEndDate(6)));
         assessments.add(new AssessmentEntity(12,8, SAMPLE_ASSESSMENT_12,
-                "Objective", getCourseEndDate(7)));
+                0, getCourseEndDate(7)));
         assessments.add(new AssessmentEntity(13,9, SAMPLE_ASSESSMENT_13,
-                "Objective", getCourseEndDate(8)));
+                0, getCourseEndDate(8)));
         assessments.add(new AssessmentEntity(14,10, SAMPLE_ASSESSMENT_14,
-                "Objective", getCourseEndDate(9)));
+                0, getCourseEndDate(9)));
         assessments.add(new AssessmentEntity(15,11, SAMPLE_ASSESSMENT_15,
-                "Objective", getCourseEndDate(10)));
+                0, getCourseEndDate(10)));
         assessments.add(new AssessmentEntity(16,12, SAMPLE_ASSESSMENT_16,
-                "Objective", getCourseEndDate(11)));
+                0, getCourseEndDate(11)));
         return assessments;
     }
 

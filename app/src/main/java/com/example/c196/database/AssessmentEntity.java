@@ -12,26 +12,26 @@ public class AssessmentEntity {
     private int id;
     private int courseId;
     private String assessmentName;
-    private String assessmentType;
-    private Date assessmentDueDate;
+    private int assessmentType;
+    private Date assessmentDate;
 
 
-    public AssessmentEntity(int id, int courseId, String assessmentName, String assessmentType,
-                            Date assessmentDueDate) {
+    public AssessmentEntity(int id, int courseId, String assessmentName, int assessmentType,
+                            Date assessmentDate) {
         this.id = id;
         this.courseId = courseId;
         this.assessmentName = assessmentName;
         this.assessmentType = assessmentType;
-        this.assessmentDueDate = assessmentDueDate;
+        this.assessmentDate = assessmentDate;
     }
 
     @Ignore
-    public AssessmentEntity(int courseId, String assessmentName, String assessmentType,
-                            Date assessmentDueDate) {
+    public AssessmentEntity(int courseId, String assessmentName, int assessmentType,
+                            Date assessmentDate) {
         this.courseId = courseId;
         this.assessmentName = assessmentName;
         this.assessmentType = assessmentType;
-        this.assessmentDueDate = assessmentDueDate;
+        this.assessmentDate = assessmentDate;
     }
 
     public int getId() {
@@ -58,19 +58,19 @@ public class AssessmentEntity {
         this.assessmentName = assessmentName;
     }
 
-    public String getAssessmentType() {
+    public int getAssessmentType() {
         return assessmentType;
     }
 
-    public void setAssessmentType(String assessmentType) {
+    public void setAssessmentType(int assessmentType) {
         this.assessmentType = assessmentType;
     }
 
-    public Date getAssessmentDueDate() {
-        return assessmentDueDate;
+    public Date getAssessmentDate() {
+        return assessmentDate;
     }
 
-    public void setAssessmentDueDate(Date assessmentDueDate) {
-        this.assessmentDueDate = assessmentDueDate;
+    public void setAssessmentDate(Date assessmentDate) {
+        this.assessmentDate = assessmentDate;
     }
 }

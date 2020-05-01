@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.c196.viewmodel.CourseViewModel;
 
 @Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class,
-        MentorEntity.class}, version = 6, exportSchema = false)
+        MentorEntity.class}, version = 7, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "C196Database.db";

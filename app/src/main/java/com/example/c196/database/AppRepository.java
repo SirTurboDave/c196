@@ -56,7 +56,7 @@ public class AppRepository {
         return mDb.termDao().getAll();
     }
 
-    public LiveData<List<CourseEntity>> getCoursesByTermId(int termId) {
+    public LiveData<List<CourseEntity>> getCoursesByTermId(final int termId) {
         return mDb.courseDao().getCoursesByTermId(termId);
     }
 
@@ -133,5 +133,13 @@ public class AppRepository {
 
     public AssessmentEntity getAssessmentById(int assessmentId) {
         return mDb.assessmentDao().getAssessmentById(assessmentId);
+    }
+
+    public void insertAssessment(AssessmentEntity assessment) {
+        executor.execute(() -> mDb.assessmentDao().insertAssessment(assessment));
+    }
+
+    public void deleteAssessment(AssessmentEntity assessment) {
+        executor.execute(() -> mDb.assessmentDao().deleteAssesssment(assessment));
     }
 }

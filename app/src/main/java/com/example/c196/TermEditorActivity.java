@@ -22,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,6 +43,9 @@ public class TermEditorActivity extends AppCompatActivity {
     private GregorianCalendar cal;
     private int termId;
     private boolean mNewTerm;
+
+    private List<CourseEntity> coursesData = new ArrayList<>();
+    private CoursesAdapter mAdapter;
 
     @BindView(R.id.term_name_edit)
     EditText mTermName;
@@ -70,13 +74,13 @@ public class TermEditorActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
             .get(TermEditorViewModel.class);
 
-        mViewModel.mLiveTerm.observe(this, (termEntity -> {
+        mViewModel.mLiveTerm.observe(this, termEntity -> {
             if (termEntity != null) {
                 mTermName.setText(termEntity.getTermName());
                 termStartDateText.setText(DateFormatter.format(termEntity.getTermStartDate()));
                 termEndDateText.setText(DateFormatter.format(termEntity.getTermEndDate()));
             }
-        }));
+        });
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
@@ -84,9 +88,16 @@ public class TermEditorActivity extends AppCompatActivity {
             mNewTerm = true;
         } else {
             setTitle("Edit Term");
-            int termId = extras.getInt(TERM_ID_KEY);
+            termId = extras.getInt(TERM_ID_KEY);
             mViewModel.loadData(termId);
         }
+
+        final Observer<List<CourseEntity>> coursesObserver = courseEntities -> {
+            coursesData.clear();
+            coursesData.addAll(courseEntities);
+        };
+
+        mViewModel.getCoursesByTermId(termId).observe(this, coursesObserver);
     }
 
     @OnClick(R.id.term_edit_start_date_fab)
@@ -128,14 +139,21 @@ public class TermEditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            saveAndReturn();
-            return true;
-        } else if(item.getItemId() == R.id.action_delete) {
-            mViewModel.deleteTerm();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                saveAndReturn();
+                return true;
+            case R.id.action_delete:
+                if (coursesData != null && coursesData.size() != 0) {
+                    Toast.makeText(this, "Courses must be removed from term first!",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    mViewModel.deleteTerm();
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -150,7 +168,8 @@ public class TermEditorActivity extends AppCompatActivity {
             Date termEndDate = DateFormatter.parse(termEndDateText.getText().toString());
 
             mViewModel.saveTerm(mTermName.getText().toString(), termStartDate, termEndDate);
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         } catch (Exception e) {
             Log.v("Exception", Objects.requireNonNull(e.getMessage()));
         }

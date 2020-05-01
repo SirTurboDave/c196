@@ -64,7 +64,6 @@ public class TermActivity extends AppCompatActivity {
 
     private TermViewModel mViewModel;
     private int termId;
-    private boolean mNewTerm;
 
     private List<CourseEntity> coursesData = new ArrayList<>();
     private CoursesAdapter mAdapter;
@@ -82,7 +81,7 @@ public class TermActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        TermViewModel mViewModel = ViewModelProviders.of(this)
+        mViewModel = ViewModelProviders.of(this)
                 .get(TermViewModel.class);
 
         mViewModel.mLiveTerm.observe(this, termEntity -> {
@@ -90,6 +89,13 @@ public class TermActivity extends AppCompatActivity {
             mTermStartDate.setText(DateFormatter.format(termEntity.getTermStartDate()));
             mTermEndDate.setText(DateFormatter.format(termEntity.getTermEndDate()));
         });
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            termId = extras.getInt(TERM_ID_KEY);
+            mViewModel.loadData(termId);
+        }
 
         final Observer<List<CourseEntity>> coursesObserver = courseEntities -> {
             coursesData.clear();
@@ -103,13 +109,7 @@ public class TermActivity extends AppCompatActivity {
             }
         };
 
-        Bundle extras = getIntent().getExtras();
-
-        if (extras != null) {
-            termId = extras.getInt(TERM_ID_KEY);
-            mViewModel.getCoursesByTermId(termId).observe(this, coursesObserver);
-            mViewModel.loadData(termId);
-        }
+        mViewModel.getCoursesByTermId(termId).observe(this, coursesObserver);
     }
 
     private void initRecyclerView() {
@@ -120,10 +120,8 @@ public class TermActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNewTerm) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.menu_term, menu);
-        }
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_term, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
