@@ -6,6 +6,20 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="55dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="25dp" />
+
     <TextView
         android:id="@+id/assessment_name_label"
         android:layout_width="160dp"
@@ -35,19 +49,60 @@
         app:layout_constraintStart_toEndOf="@+id/assessment_name_label"
         app:layout_constraintTop_toTopOf="@+id/guideline_top" />
 
+    <TextView
+        android:id="@+id/assessment_type_label"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:gravity="end"
+        android:text="@string/assessment_type"
+        android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
+        app:layout_constraintEnd_toStartOf="@+id/assessment_type"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_name_label" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="55dp" />
+    <TextView
+        android:id="@+id/assessment_date"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/assessment_date"
+        android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/assessment_date_label"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_type" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="25dp" />
+    <TextView
+        android:id="@+id/assessment_date_label"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:gravity="end"
+        android:text="@string/assessment_date"
+        android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
+        app:layout_constraintEnd_toStartOf="@+id/assessment_date"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_type_label" />
+
+    <TextView
+        android:id="@+id/assessment_type"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/assessment_type"
+        android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/assessment_type_label"
+        app:layout_constraintTop_toBottomOf="@+id/assessment_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,9 +45,6 @@ public class CourseEditorActivity extends AppCompatActivity {
     private int termId;
     private int courseStatus;
     private boolean mNewCourse;
-    private ArrayAdapter<CharSequence> adapter;
-    private List<CharSequence> items;
-    private String[] courseStatusArray;
 
     @BindView(R.id.course_name_edit)
     EditText mCourseName;
@@ -107,9 +104,9 @@ public class CourseEditorActivity extends AppCompatActivity {
     }
 
     private void initSpinner() {
-        courseStatusArray = getResources().getStringArray(R.array.course_status_array);
-        items = new ArrayList<>(Arrays.asList(courseStatusArray));
-        adapter = new ArrayAdapter<>(this,
+        String[] courseStatusArray = getResources().getStringArray(R.array.course_status_array);
+        List<CharSequence> items = new ArrayList<>(Arrays.asList(courseStatusArray));
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, items);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

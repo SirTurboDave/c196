@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.ArrayAdapter;
 
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 import butterknife.ButterKnife;
@@ -18,6 +20,10 @@ import butterknife.ButterKnife;
 public class AssessmentEditorActivity extends AppCompatActivity {
 
     private AssessmentEditorViewModel mViewModel;
+    private GregorianCalendar cal;
+    private int courseId;
+    private int assessmentType;
+    private boolean mNewAssessment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

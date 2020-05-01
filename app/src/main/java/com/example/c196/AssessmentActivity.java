@@ -11,7 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.c196.utilities.DateFormatter;
 import com.example.c196.viewmodel.AssessmentViewModel;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +27,12 @@ public class AssessmentActivity extends AppCompatActivity {
 
     @BindView(R.id.assessment_name)
     TextView mAssessmentName;
+
+    @BindView(R.id.assessment_type)
+    TextView mAssessmentType;
+
+    @BindView(R.id.assessment_date)
+    TextView mAssessmentDate;
 
     private int courseId;
     private int assessmentId;
@@ -42,8 +51,18 @@ public class AssessmentActivity extends AppCompatActivity {
                 .get(AssessmentViewModel.class);
 
         mViewModel.mLiveAssessment.observe(this, assessmentEntity -> {
-            getSupportActionBar().setTitle(assessmentEntity.getAssessmentName());
+            Objects.requireNonNull(getSupportActionBar()).setTitle(assessmentEntity
+                    .getAssessmentName());
             mAssessmentName.setText(assessmentEntity.getAssessmentName());
+            switch(assessmentEntity.getAssessmentType()) {
+                case 0:
+                    mAssessmentType.setText(R.string.objective);
+                    break;
+                case 1:
+                    mAssessmentType.setText(R.string.performance);
+                    break;
+            }
+            mAssessmentDate.setText(DateFormatter.format(assessmentEntity.getAssessmentDate()));
         });
 
         Bundle extras = getIntent().getExtras();
@@ -68,6 +87,7 @@ public class AssessmentActivity extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.action_edit:
                 Intent intent = new Intent(this, AssessmentEditorActivity.class);
+                intent.putExtra(COURSE_ID_KEY, courseId);
                 intent.putExtra(ASSESSMENT_ID_KEY, assessmentId);
                 startActivity(intent);
             default:
