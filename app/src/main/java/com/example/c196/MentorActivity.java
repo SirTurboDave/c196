@@ -1,8 +1,10 @@
 package com.example.c196;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.c196.viewmodel.MentorViewModel;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +51,7 @@ public class MentorActivity extends AppCompatActivity {
                 .get(MentorViewModel.class);
 
         mViewModel.mLiveMentor.observe(this, mentorEntity -> {
-            getSupportActionBar().setTitle(mentorEntity.getMentorName());
+            Objects.requireNonNull(getSupportActionBar()).setTitle(mentorEntity.getMentorName());
             mMentorName.setText(mentorEntity.getMentorName());
             mMentorPhone.setText(mentorEntity.getMentorPhone());
             mMentorEmail.setText(mentorEntity.getMentorEmail());
@@ -68,5 +72,25 @@ public class MentorActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_mentor, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.action_edit:
+                Intent intent = new Intent(this, MentorEditorActivity.class);
+                intent.putExtra(COURSE_ID_KEY, courseId);
+                intent.putExtra(MENTOR_ID_KEY, mentorId);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CourseActivity.class);
+        intent.putExtra(COURSE_ID_KEY, courseId);
+        startActivity(intent);
     }
 }

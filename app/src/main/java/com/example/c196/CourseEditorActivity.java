@@ -121,7 +121,7 @@ public class CourseEditorActivity extends AppCompatActivity {
             cal.set(Calendar.MONTH, monthOfYear);
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-            courseStartDateText.setText((DateFormatter.format(cal.getTime())));
+            courseStartDateText.setText(DateFormatter.format(cal.getTime()));
         };
         new DatePickerDialog(this, date, cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
@@ -173,11 +173,11 @@ public class CourseEditorActivity extends AppCompatActivity {
         try {
             Date courseStartDate = DateFormatter.parse(courseStartDateText.getText().toString());
             Date courseEndDate = DateFormatter.parse(courseEndDateText.getText().toString());
-
-
             mViewModel.saveCourse(termId, mCourseName.getText().toString(), courseStartDate,
                     courseEndDate, courseStatus, mCourseNote.getText().toString());
-            finish();
+            Intent intent = new Intent(this, TermActivity.class);
+            intent.putExtra(TERM_ID_KEY, termId);
+            startActivity(intent);
         } catch (Exception e) {
             Log.v("Exception", Objects.requireNonNull(e.getMessage()));
         }

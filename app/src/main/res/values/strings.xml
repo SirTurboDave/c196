@@ -44,8 +44,4 @@
     <string name="objective">Objective</string>
     <string name="performance">Performance</string>
     <string name="date">Date</string>
-    <string-array name="course_status_array">
-        <item>In Progress</item>
-        <item>Completed</item>
-    </string-array>
 </resources>
