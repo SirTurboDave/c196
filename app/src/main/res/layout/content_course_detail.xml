@@ -42,6 +42,19 @@
             app:layout_constraintStart_toEndOf="@+id/course_start_date_label"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/course_start_date_alert_fab"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="@+id/course_start_date"
+            app:layout_constraintEnd_toEndOf="@+id/course_start_date"
+            app:layout_constraintStart_toEndOf="@+id/course_start_date"
+            app:layout_constraintTop_toTopOf="@+id/course_start_date"
+            app:srcCompat="@drawable/ic_alert" />
+
         <TextView
             android:id="@+id/course_end_date_label"
             android:layout_width="@dimen/layout_text_width"
@@ -72,6 +85,20 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/course_end_date_label"
             app:layout_constraintTop_toBottomOf="@+id/course_start_date" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/course_end_date_alert_fab"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:onClick="setCourseEndDateAlarm"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="@+id/course_end_date"
+            app:layout_constraintEnd_toEndOf="@+id/course_end_date"
+            app:layout_constraintStart_toEndOf="@+id/course_end_date"
+            app:layout_constraintTop_toTopOf="@+id/course_end_date"
+            app:srcCompat="@drawable/ic_alert" />
 
         <TextView
             android:id="@+id/course_status"
@@ -106,7 +133,7 @@
 
         <TextView
             android:id="@+id/course_note_label"
-            android:layout_width="250dp"
+            android:layout_width="125dp"
             android:layout_height="40dp"
             android:gravity="center"
             android:labelFor="@id/course_note"
@@ -238,6 +265,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mentor_toolbar" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/course_note_share_fab"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="@+id/course_note_label"
+            app:layout_constraintEnd_toEndOf="@+id/course_note_label"
+            app:layout_constraintStart_toEndOf="@+id/course_note_label"
+            app:layout_constraintTop_toTopOf="@+id/course_note_label"
+            app:srcCompat="@drawable/ic_share" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

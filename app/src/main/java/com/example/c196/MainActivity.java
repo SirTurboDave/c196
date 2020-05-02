@@ -1,6 +1,9 @@
 package com.example.c196;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.c196.database.TermEntity;
@@ -29,6 +32,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.example.c196.utilities.Constants.CHANNEL_ID;
+import static com.example.c196.utilities.Constants.CHANNEL_NAME;
+
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
@@ -54,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initRecyclerView();
         initViewModel();
+        createNotificationChannel();
     }
 
     private void initViewModel() {
@@ -107,5 +114,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void addSampleTerms() {
         mViewModel.addSampleData();
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }

@@ -44,4 +44,8 @@
     <string name="objective">Objective</string>
     <string name="performance">Performance</string>
     <string name="date">Date</string>
+    <string name="notification_title">Notification Title</string>
+    <string name="notification_content">Notification Content</string>
+    <string name="channel_name">Channel Name</string>
+    <string name="channel_description">Channel Description</string>
 </resources>
