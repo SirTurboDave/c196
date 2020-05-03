@@ -7,4 +7,6 @@ public class Constants {
     public static final String MENTOR_ID_KEY = "mentor_id_key";
     public static final String CHANNEL_ID = "com.example.c196.ANDROID";
     public static final String CHANNEL_NAME = "NOTIFICATION CHANNEL";
+    public static final String NOTIFICATION_TITLE = "notification_title";
+    public static final String NOTIFICATION_TEXT = "notification_text";
 }

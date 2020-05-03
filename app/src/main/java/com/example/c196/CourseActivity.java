@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Build;
@@ -17,6 +18,7 @@ import com.example.c196.ui.AssessmentsAdapter;
 import com.example.c196.ui.CoursesAdapter;
 import com.example.c196.ui.MentorsAdapter;
 import com.example.c196.utilities.DateFormatter;
+import com.example.c196.utilities.MyReceiver;
 import com.example.c196.viewmodel.CourseViewModel;
 import com.example.c196.viewmodel.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,50 +53,57 @@ import butterknife.OnClick;
 
 import static com.example.c196.utilities.Constants.CHANNEL_ID;
 import static com.example.c196.utilities.Constants.COURSE_ID_KEY;
+import static com.example.c196.utilities.Constants.NOTIFICATION_TEXT;
+import static com.example.c196.utilities.Constants.NOTIFICATION_TITLE;
 import static com.example.c196.utilities.Constants.TERM_ID_KEY;
 
 public class CourseActivity extends AppCompatActivity {
 
-    private GregorianCalendar courseStartDate;
-    private GregorianCalendar courseEndDate;
+    private Date courseStartDate;
+    private Date courseEndDate;
 
     @BindView(R.id.course_start_date)
     TextView mCourseStartDate;
 
-//    @OnClick(R.id.course_start_date_alert_fab)
-//    public void setCourseStartDateAlert() {
-//
-//    }
+    @OnClick(R.id.course_start_date_alert_fab)
+    public void setCourseStartDateAlarm(View view) {
+        try {
+            courseStartDate = DateFormatter.parse(mCourseStartDate.getText().toString());
+        } catch (Exception e) {
+            Log.v("Exception", Objects.requireNonNull(e.getMessage()));
+        }
+
+        Intent intent = new Intent(this, MyReceiver.class);
+        intent.putExtra(NOTIFICATION_TITLE, "Course Starting");
+        intent.putExtra(NOTIFICATION_TEXT, "A course is starting today!");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
+                intent, 0);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        long date = courseStartDate.getTime();
+        assert alarmManager != null;
+        alarmManager.set(AlarmManager.RTC_WAKEUP, date, pendingIntent);
+    }
 
     @BindView(R.id.course_end_date)
     TextView mCourseEndDate;
 
     @OnClick(R.id.course_end_date_alert_fab)
     public void setCourseEndDateAlarm(View view) {
-        courseEndDate = new GregorianCalendar();
         try {
-            courseEndDate.setTime(DateFormatter.parse(mCourseEndDate.getText().toString()));
+            courseEndDate = DateFormatter.parse(mCourseEndDate.getText().toString());
         } catch (Exception e) {
             Log.v("Exception", Objects.requireNonNull(e.getMessage()));
         }
-        Intent intent = new Intent(this, CourseActivity.class);
-        intent.putExtra(COURSE_ID_KEY, courseId);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("My notification")
-                .setContentText("Hello World!")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                // Set the intent that will fire when the user taps the notification
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-// notificationId is a unique int for each notification that you must define
-        int notificationId = 1;
-        notificationManager.notify(notificationId, builder.build());
+        Intent intent = new Intent(this, MyReceiver.class);
+        intent.putExtra(NOTIFICATION_TITLE, "Course Ending");
+        intent.putExtra(NOTIFICATION_TEXT, "A course is ending today!");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
+                intent, 0);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        long date = courseEndDate.getTime();
+        assert alarmManager != null;
+        alarmManager.set(AlarmManager.RTC_WAKEUP, date, pendingIntent);
     }
 
     @BindView(R.id.course_status)
@@ -244,14 +253,12 @@ public class CourseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.action_edit:
-                Intent intent = new Intent(this, CourseEditorActivity.class);
-                intent.putExtra(TERM_ID_KEY, termId);
-                intent.putExtra(COURSE_ID_KEY, courseId);
-                startActivity(intent);
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_edit) {
+            Intent intent = new Intent(this, CourseEditorActivity.class);
+            intent.putExtra(TERM_ID_KEY, termId);
+            intent.putExtra(COURSE_ID_KEY, courseId);
+            startActivity(intent);
         }
+        return super.onOptionsItemSelected(item);
     }
 }

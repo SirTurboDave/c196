@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">WGU Term Tracker</string>
-    <string name="action_add_sample_data">Add sample data</string>
     <string name="title_activity_term_detail">TermDetailActivity</string>
     <string name="title_activity_term_editor">TermEditorActivity</string>
     <string name="delete_all_terms">Delete all terms</string>
@@ -12,10 +11,7 @@
     <string name="courses">Courses</string>
     <string name="action_add_sample_terms">Add sample terms</string>
     <string name="delete">Delete</string>
-    <item name="term_name" type="id" />
     <string name="title_activity_course">CourseActivity</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
     <string name="course_name">Course Name</string>
     <string name="course_start_date">Start Date</string>
@@ -44,8 +40,5 @@
     <string name="objective">Objective</string>
     <string name="performance">Performance</string>
     <string name="date">Date</string>
-    <string name="notification_title">Notification Title</string>
-    <string name="notification_content">Notification Content</string>
-    <string name="channel_name">Channel Name</string>
     <string name="channel_description">Channel Description</string>
 </resources>

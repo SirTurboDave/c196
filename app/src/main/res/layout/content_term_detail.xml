@@ -13,13 +13,14 @@
         android:layout_width="110dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="120dp"
         android:autofillHints="@string/start_date"
         android:gravity="end"
         android:text="@string/start_date"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/term_start_date_label"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -31,22 +32,26 @@
         android:paddingStart="20dp"
         android:paddingEnd="5dp"
         android:text="@string/term_start_date"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
         app:layout_constraintEnd_toStartOf="@+id/term_start_date"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/term_start_date" />
 
     <TextView
         android:id="@+id/term_end_date"
         android:layout_width="110dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="120dp"
         android:autofillHints="@string/start_date"
         android:gravity="end"
         android:text="@string/end_date"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/term_end_date_label"
         app:layout_constraintTop_toBottomOf="@+id/term_start_date" />
 
     <TextView
@@ -58,49 +63,49 @@
         android:paddingStart="20dp"
         android:paddingEnd="5dp"
         android:text="@string/term_end_date"
-        android:textSize="@dimen/list_text_size"
         android:textColor="@color/list_text_color"
+        android:textSize="@dimen/list_text_size"
         app:layout_constraintEnd_toStartOf="@+id/term_end_date"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/term_start_date_label" />
 
-    <androidx.appcompat.widget.Toolbar
+    <TextView
         android:id="@+id/course_toolbar"
-        android:layout_width="400dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toBottomOf="@id/term_end_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/term_course_list"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="104dp" />
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/layout_margin"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/courses"
+        android:textColor="@color/colorTitle"
+        android:textSize="@dimen/title_text_size"
+        app:layout_constraintTop_toBottomOf="@id/term_end_date_label" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/term_course_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/list_margin"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:scrollbars="vertical"
-        android:layout_margin="@dimen/list_margin"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/course_toolbar"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/course_toolbar" />
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/courses"
-        android:textSize="@dimen/title_text_size"
         android:textColor="@color/colorTitle"
+        android:textSize="@dimen/title_text_size"
+        app:layout_constraintBottom_toBottomOf="@id/course_toolbar"
         app:layout_constraintEnd_toEndOf="@id/course_toolbar"
         app:layout_constraintStart_toStartOf="@id/course_toolbar"
         app:layout_constraintTop_toTopOf="@id/course_toolbar"
-        app:layout_constraintBottom_toBottomOf="@id/course_toolbar"
         tools:layout_editor_absoluteY="143dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

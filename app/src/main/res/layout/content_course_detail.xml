@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -158,43 +157,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/course_note_label" />
 
-
-        <androidx.appcompat.widget.Toolbar
+        <TextView
             android:id="@+id/assessment_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_margin="@dimen/layout_margin"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/course_note" />
-
-        <TextView
-            android:id="@+id/assessment_toolbar_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/assessments"
             android:textColor="@color/colorTitle"
             android:textSize="@dimen/title_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/assessment_toolbar"
-            app:layout_constraintEnd_toEndOf="@id/assessment_toolbar"
-            app:layout_constraintStart_toStartOf="@id/assessment_toolbar"
-            app:layout_constraintTop_toTopOf="@id/assessment_toolbar" />
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/course_note" />
 
         <ImageButton
             android:id="@+id/course_assessment_add"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="332dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="@dimen/layout_margin"
             android:background="@color/colorPrimary"
             android:contentDescription="@string/add_assessment"
             app:layout_constraintBottom_toBottomOf="@+id/assessment_toolbar"
             app:layout_constraintEnd_toEndOf="@+id/assessment_toolbar"
-            app:layout_constraintStart_toStartOf="@+id/assessment_toolbar"
             app:layout_constraintTop_toTopOf="@+id/assessment_toolbar"
             app:srcCompat="@drawable/ic_add" />
 
@@ -211,45 +194,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/assessment_toolbar" />
 
-        <androidx.appcompat.widget.Toolbar
+        <TextView
             android:id="@+id/mentor_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_margin="@dimen/layout_margin"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintBottom_toTopOf="@id/course_mentor_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/course_assessment_list"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="104dp" />
-
-        <TextView
-            android:id="@+id/mentor_toolbar_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/mentors"
             android:textColor="@color/colorTitle"
             android:textSize="@dimen/title_text_size"
-            app:layout_constraintBottom_toBottomOf="@id/mentor_toolbar"
-            app:layout_constraintEnd_toEndOf="@id/mentor_toolbar"
-            app:layout_constraintStart_toStartOf="@id/mentor_toolbar"
-            app:layout_constraintTop_toTopOf="@id/mentor_toolbar"
-            tools:layout_editor_absoluteY="143dp" />
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toBottomOf="@id/course_assessment_list" />
 
         <ImageButton
             android:id="@+id/course_mentor_add"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="332dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="@dimen/layout_margin"
             android:background="@color/colorPrimary"
             android:contentDescription="@string/add_mentor"
             app:layout_constraintBottom_toBottomOf="@+id/mentor_toolbar"
             app:layout_constraintEnd_toEndOf="@+id/mentor_toolbar"
-            app:layout_constraintStart_toStartOf="@+id/mentor_toolbar"
             app:layout_constraintTop_toTopOf="@+id/mentor_toolbar"
             app:srcCompat="@drawable/ic_add" />
 
