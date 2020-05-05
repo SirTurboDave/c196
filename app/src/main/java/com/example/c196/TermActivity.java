@@ -127,14 +127,12 @@ public class TermActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.action_edit:
-                Intent intent = new Intent(this, TermEditorActivity.class);
-                intent.putExtra(TERM_ID_KEY, termId);
-                startActivity(intent);
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_edit) {
+            Intent intent = new Intent(this, TermEditorActivity.class);
+            intent.putExtra(TERM_ID_KEY, termId);
+            startActivity(intent);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

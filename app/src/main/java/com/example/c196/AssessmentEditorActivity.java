@@ -153,13 +153,6 @@ public class AssessmentEditorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, AssessmentActivity.class);
-        intent.putExtra(ASSESSMENT_ID_KEY, assessmentId);
-        startActivity(intent);
-    }
-
     private void saveAndReturn() {
         try {
             Date mAssessmentDate = DateFormatter.parse(mAssessmentDateText.getText().toString());

@@ -108,13 +108,6 @@ public class MentorEditorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MentorActivity.class);
-        intent.putExtra(MENTOR_ID_KEY, mentorId);
-        startActivity(intent);
-    }
-
     private void saveAndReturn() {
         try {
             mViewModel.saveMentor(courseId, mMentorName.getText().toString(),

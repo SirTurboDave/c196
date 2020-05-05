@@ -122,5 +122,4 @@ public class AssessmentActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
